@@ -1,11 +1,11 @@
 # Fdb version 4
-["xdvipdfmx"] 1791657187.64673 "main.xdv" "main.pdf" "main" 1791657187.9144 0
-  "main.xdv" 1791657187.6125 914252 64b681b71cf7ec9d870d313d1f017b28 "xelatex"
+["xdvipdfmx"] 1791658257.67297 "main.xdv" "main.pdf" "main" 1791658257.96307 0
+  "main.xdv" 1791658257.62696 914688 e077617c733f4d390439641c216a0213 "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1791657186.50294 "/Users/tudung/Documents/GitHub/icpc-phao/main.tex" "main.xdv" "main" 1791657187.91337 0
-  "/Users/tudung/Documents/GitHub/icpc-phao/main.tex" 1791657155.64424 2239 0b0da668efb526a82dd3881ad402e57d ""
+["xelatex"] 1791658255.95678 "/Users/tudung/Documents/GitHub/icpc-phao/main.tex" "main.xdv" "main" 1791658257.96213 0
+  "/Users/tudung/Documents/GitHub/icpc-phao/main.tex" 1791658255.4809 2249 907df2d4bff49c5aad0f23cf5691d573 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1246382020 996 a18840b13b499c08ac2de96a99eda4bc ""
@@ -101,10 +101,10 @@
   "code/quick_reference/pragmas.txt" 1791655868.15565 2059 84a70e7a963929cef2bd81a04e0059b9 ""
   "code/strings/advanced.hpp" 1791655602.99805 2876 83def66034215662b2d928268fcbb248 ""
   "code/strings/basic.hpp" 1791655602.99829 2070 2ab1f5080e2f650a215e50fe9afc03a5 ""
-  "main.aux" 1791657187.61099 12603 6da48b9cd24bd5fc0babd616aff91f94 "xelatex"
-  "main.out" 1791657187.61204 11836 045d8f3ec32659ab8362f83e49a28cf0 "xelatex"
-  "main.tex" 1791657155.64424 2239 0b0da668efb526a82dd3881ad402e57d ""
-  "main.toc" 1791657187.61243 6768 3595f2c8c6f7ed1f8e73974def21c016 "xelatex"
+  "main.aux" 1791658257.62296 12603 6da48b9cd24bd5fc0babd616aff91f94 "xelatex"
+  "main.out" 1791658257.62565 11836 045d8f3ec32659ab8362f83e49a28cf0 "xelatex"
+  "main.tex" 1791658255.4809 2249 907df2d4bff49c5aad0f23cf5691d573 ""
+  "main.toc" 1791658257.62676 6768 3595f2c8c6f7ed1f8e73974def21c016 "xelatex"
   "topics/combinatorics.tex" 1791655377.88223 3396 235e233e546b05cf15577312ed2e63bf ""
   "topics/dp_optimization.tex" 1791657004.6944 3813 9cbb7da7131288d4aac6c87c33623e58 ""
   "topics/flow.tex" 1791656985.41583 5318 8a8a5cfa87646096f029aacba90f2fc2 ""

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.8.29)  11 OCT 2026 01:33
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.8.29)  11 OCT 2026 01:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -536,18 +536,18 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: landscape 
+* modes: landscape includehead 
 * h-part:(L,W,R)=(34.1433pt, 776.76025pt, 34.1433pt)
-* v-part:(T,H,B)=(39.83385pt, 523.53073pt, 34.1433pt)
+* v-part:(T,H,B)=(25.60747pt, 549.13821pt, 22.76219pt)
 * \paperwidth=845.04684pt
 * \paperheight=597.50787pt
 * \textwidth=776.76025pt
-* \textheight=523.53073pt
+* \textheight=526.37604pt
 * \oddsidemargin=-38.1267pt
 * \evensidemargin=-38.1267pt
-* \topmargin=-69.43614pt
-* \headheight=14.0pt
-* \headsep=25.0pt
+* \topmargin=-46.66252pt
+* \headheight=14.22636pt
+* \headsep=8.53581pt
 * \topskip=10.0pt
 * \footskip=30.0pt
 * \marginparwidth=144.0pt
@@ -607,10 +607,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  14950 strings out of 469709
  282845 string characters out of 5466023
- 2257247 words of memory out of 5000000
+ 2256305 words of memory out of 5000000
  43266 multiletter control sequences out of 15000+600000
  633306 words of font info for 114 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  73i,14n,93p,414b,2111s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (22 pages, 914252 bytes).
+Output written on main.xdv (22 pages, 914688 bytes).
