@@ -1,0 +1,50 @@
+\section{Cặp ghép}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Cặp ghép hai phía}
+Đồ thị hai phía có tập đỉnh $L,R$ và chỉ có cạnh giữa hai phía.
+Cặp ghép là tập cạnh không chung đầu mút; cặp ghép cực đại theo
+\emph{số cạnh} có lực lượng lớn nhất. Đừng nhầm với cặp ghép
+\emph{tối đại} chỉ có nghĩa là không thêm ngay được một cạnh.
+Đường tăng bắt đầu ở đỉnh chưa ghép bên $L$, luân phiên qua cạnh
+chưa ghép và cạnh đã ghép, kết thúc ở đỉnh chưa ghép bên $R$.
+Đảo trạng thái các cạnh trên đường này làm kích thước tăng $1$.
+Một cặp ghép là cực đại khi và chỉ khi không còn đường tăng
+(định lý Berge).
+
+\subsection{Đường tăng và thuật toán Hopcroft--Karp}
+Hopcroft--Karp dùng BFS tìm độ dài ngắn nhất của các đường tăng,
+rồi DFS lấy nhiều đường tăng cùng độ dài trong một pha.
+Độ phức tạp $O((V+E)\sqrt V)$, phù hợp khi hai phía và số cạnh lớn.
+Mẫu code nhận đỉnh trái $[0,n_L)$, đỉnh phải $[0,n_R)$; gọi
+\texttt{maxMatching()} một lần sau khi thêm hết cạnh.
+\cppsnippet{code/matching/hopcroft_karp.hpp}
+
+\subsection{Định lý König}
+Trong đồ thị hai phía, kích thước cặp ghép cực đại bằng kích
+thước phủ đỉnh cực tiểu. Sau khi tìm ghép cực đại, bắt đầu từ
+các đỉnh trái chưa ghép; đi theo cạnh \emph{chưa ghép} từ trái
+sang phải, rồi cạnh \emph{đã ghép} từ phải sang trái.
+Gọi tập đạt được là $Z_L,Z_R$. Phủ đỉnh cực tiểu là
+$(L\setminus Z_L)\cup Z_R$. Mẫu Hopcroft--Karp có hàm
+\texttt{minVertexCover()} trả hai danh sách đỉnh theo công thức đó.
+
+\subsection{Bài toán gán có trọng số}
+Với $n$ người, $m\ge n$ việc, chi phí $c_{ij}$, cần gán mỗi
+người một việc khác nhau để tổng chi phí nhỏ nhất. Đây là bài
+toán gán \emph{đầy đủ ở phía trái}; thuật toán Hungarian chạy
+$O(n^2m)$, kể cả chi phí âm. Nếu một cặp bị cấm, không tự ý
+đặt chi phí vô cực rồi chấp nhận kết quả: phải kiểm tra có
+gán hợp lệ hay không. Hàm dưới nhận ma trận $n\times m$ có
+mọi ô hữu hạn, trả tổng chi phí và cột được gán cho từng hàng.
+Trong vector đầu vào và kết quả, hàng/cột đánh số từ $0$.
+Các chi phí đầu vào là \texttt{long long}, còn tổng chi phí
+và các biến trung gian dùng \texttt{\_\_int128} để tránh tràn.
+Bài toán tìm tổng lớn nhất có thể đổi dấu mọi chi phí rồi lấy
+đối dấu kết quả, chú ý tràn với giá trị cực tiểu của kiểu số.
+
+\vspace{-4mm}
+\paragraph{Mẫu Hungarian (C++17).}
+\cppsnippet{code/matching/hungarian.hpp}
+\end{multicols}
+\endgroup

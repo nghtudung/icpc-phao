@@ -1,0 +1,143 @@
+\clearpage
+\section{Tra cứu nhanh}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Dấu hiệu nhận dạng dạng bài}
+Các dấu hiệu sau gợi ý hướng thử; luôn đối chiếu ràng buộc và
+chứng minh điều kiện áp dụng.
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item \textbf{Tối ưu một giá trị số}: nếu mệnh đề đạt ít nhất $x$
+      (hoặc không quá $x$) đơn điệu, thử tìm kiếm nhị phân trên đáp án.
+      Ghi rõ hai biên và chiều đơn điệu.
+\item \textbf{Nhiều truy vấn, dữ liệu cố định}: cân nhắc tiền xử lý
+      bằng prefix sum, sparse table, LCA hoặc xử lý ngoại tuyến.
+      Nếu có cập nhật, xác định phép gộp rồi xét Fenwick/segment tree.
+\item \textbf{Phụ thuộc trên DAG}: topo rồi DP theo thứ tự topo.
+      Nếu có chu trình, cần trạng thái hoặc lập luận khác.
+\item \textbf{Mỗi đỉnh có đúng một cạnh đi ra}: đồ thị hàm gồm các
+      chu trình và cây đổ vào chúng; tách chu trình khi đếm hoặc nhảy xa.
+\item \textbf{Chọn/bỏ từng phần tử, $n$ nhỏ}: xét bitmask DP hoặc
+      meet-in-the-middle. $2^{20}$ xấp xỉ $10^6$, nhưng còn phải tính
+      số chuyển trạng thái và số bộ test.
+\item \textbf{Ghép cặp hợp lệ}: kiểm tra cấu trúc hai phía.
+      Nếu có chi phí, xét bài toán gán; nếu có sức chứa, xét luồng.
+\item \textbf{Điều kiện kéo theo giữa các lựa chọn}: thử mô hình min-cut;
+      cạnh sức chứa vô hạn cấm các cách chia không hợp lệ.
+\item \textbf{Quá trình ngẫu nhiên}: DP xác suất/kỳ vọng trên trạng thái;
+      nếu có vòng lặp, lập hệ phương trình và xét khả năng không dừng.
+\item \textbf{Trò chơi hai người}: xác định thắng/thua từ các nước đi.
+      Dùng Grundy khi trò chơi là tổng các phần độc lập phù hợp.
+\item \textbf{Tọa độ nguyên, hỏi hướng/diện tích}: ưu tiên tích có hướng
+      số nguyên; giao điểm và đường tròn cần xét sai số, suy biến.
+\end{itemize}
+
+\subsection{Gợi ý tư duy ad hoc và constructive}
+\paragraph{Tìm cấu trúc.}
+Thử dữ liệu nhỏ và cực trị; thay số cụ thể bằng thứ tự, chẵn lẻ,
+phần dư hoặc quan hệ bằng nhau. Sắp xếp rồi xét đổi chỗ hai phần tử
+kề nhau: nếu đổi chỗ không làm đáp án xấu hơn, chứng minh bằng
+\emph{exchange argument} để suy ra dạng nghiệm chuẩn.
+Với thao tác lặp, tìm bất biến hoặc thế năng nguyên bị chặn
+và thay đổi chặt để chứng minh không lặp vô hạn.
+
+\paragraph{Dựng và chứng minh.}
+Trước hết tìm điều kiện cần bằng bất biến, giới hạn tổng, chẵn lẻ,
+bậc hoặc đếm. Khi dựng từng bước, ghi rõ điều kiện còn giữ sau bước đó.
+Chứng minh luôn có bước tiếp theo, quá trình kết thúc, và cấu hình cuối
+thỏa \emph{mọi} điều kiện. Nếu lập luận chỉ đúng từ một kích thước nào đó,
+xử lý riêng các trường hợp nhỏ. Với tham lam theo thứ tự từ điển,
+phải chứng minh lựa chọn hiện tại vẫn cho phép hoàn thành phần còn lại.
+
+\paragraph{Tìm phản ví dụ.}
+Thử $n=0,1,2$ nếu hợp lệ; tất cả bằng nhau; tăng/giảm nghiêm ngặt;
+giá trị âm, $0$, dương; các giá trị biên; nhiều nghiệm tối ưu.
+Với tham lam, tìm hai lựa chọn đầu tiên dẫn đến kết quả khác nhau.
+Vét cạn $n$ nhỏ giúp bác bỏ giả thuyết, nhưng không thay thế chứng minh.
+\subsection{Công thức thường quên}
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item $\sum_{i=1}^{n}i=n(n+1)/2$;
+      $\sum_{i=1}^{n}i^2=n(n+1)(2n+1)/6$;
+      $\binom n2=n(n-1)/2$.
+\item $1+r+\cdots+r^{n-1}=(r^n-1)/(r-1)$ khi $r\ne1$;
+      với $r=1$, tổng bằng $n$. Khi tính modulo, chỉ chia cho $r-1$
+      nếu nghịch đảo modulo tồn tại.
+\item Với $P[0]=0$, $P[i+1]=P[i]+a[i]$, tổng nửa mở $[l,r)$
+      là $P[r]-P[l]$. Độ dài giao hai đoạn nửa mở bằng
+      $\max(0,\min(r_1,r_2)-\max(l_1,l_2))$.
+\item Với $a\ge0$, $b>0$:
+      $\lceil a/b\rceil=\lfloor a/b\rfloor+[a\bmod b\ne0]$.
+      Cách viết $(a+b-1)/b$ có thể tràn số nguyên.
+\item Với $a,b\ne0$:
+      $\operatorname{lcm}(a,b)=|a/\gcd(a,b)\cdot b|$;
+      chia trước khi nhân nhưng vẫn kiểm tra tràn.
+\item Với $m>0$, phần dư chuẩn hóa của $a$ là
+      $((a\bmod m)+m)\bmod m$ về mặt toán học.
+      Trong C++, dùng \texttt{r=a\%m; if(r<0) r+=m;}
+      để tránh cộng thêm $m$ khi không cần.
+      Chia modulo $m$ chỉ hợp lệ khi mẫu nguyên tố cùng nhau với $m$.
+\item Với $x>0$, $x\mathbin{\&}(-x)$ lấy bit $1$ thấp nhất;
+      $x\mathbin{\&}(x-1)$ xóa bit $1$ thấp nhất.
+\item $2S=|\sum_i\operatorname{cross}(P_i,P_{i+1})|$
+      cho đa giác đơn. Khi chỉ so sánh khoảng cách, dùng bình phương
+      khoảng cách để tránh \texttt{sqrt}.
+\item $\Pr(A\cup B)=\Pr(A)+\Pr(B)-\Pr(A\cap B)$.
+      Với $X$ nguyên không âm,
+      $\mathbb E[X]=\sum_{k\ge1}\Pr(X\ge k)$,
+      kể cả khi tổng có thể vô hạn.
+\end{itemize}
+
+\subsection{Checklist lỗi và trường hợp biên}
+\paragraph{Trước khi cài.}
+Xác định đoạn đóng hay nửa mở, chỉ số từ $0$ hay $1$, trạng thái vô
+nghiệm, đồ thị có thể rời rạc/có cạnh song song/khuyên hay không.
+Ước lượng thời gian và bộ nhớ ở ràng buộc lớn nhất, kể cả nhiều test.
+\paragraph{Trước khi nộp.}
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item Kiểm tra $n=0$ hoặc $1$ nếu hợp lệ, tập rỗng, mọi phần tử bằng nhau,
+      không có cạnh, đồ thị không liên thông, đáp án bằng $0$.
+\item Kiểm tra tràn ở tích, tổng đường đi, $\mathrm{INF}+w$,
+      tích ma trận, diện tích và $\operatorname{lcm}$;
+      ép kiểu \texttt{1LL} hoặc \texttt{\_\_int128} \emph{trước} khi nhân.
+\item Kiểm tra chia cho $0$, modulo âm, nghịch đảo không tồn tại;
+      số thực gần $0$, đường song song/trùng, điểm trùng/thẳng hàng.
+\item Xóa trạng thái giữa các test: mảng đánh dấu, danh sách kề,
+      queue, biến toàn cục, nén tọa độ và đáp án.
+\item Kiểm tra \texttt{i+1}, \texttt{i-1},
+      \texttt{lower\_bound == end}, và phép trừ trên \texttt{size\_t}.
+\item Nếu đệ quy sâu đến $O(n)$, xem giới hạn stack. Thử một test
+      tự tính tay và vài test nhỏ ngẫu nhiên đối chiếu với vét cạn;
+      khi sai, giữ seed và rút nhỏ phản ví dụ.
+\end{itemize}
+\subsection{Cú pháp Python cho số nguyên lớn}
+Chỉ dùng nếu Python được phép và thời gian đủ. \texttt{int} không bị
+giới hạn $64$ bit, nhưng phép toán trên số rất dài vẫn tốn thời gian.
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item \texttt{a = int(input())}; với nhiều dòng, dùng
+      \texttt{sys.stdin.buffer.readline}. Xuất bằng \texttt{print(a)}.
+\item \texttt{a // b} lấy sàn kể cả khi $a<0$;
+      \texttt{a \% b} bằng $0$ hoặc cùng dấu với $b$ khi $b\ne0$.
+      \texttt{divmod(a,b)} trả về thương và dư.
+\item \texttt{pow(a,k,m)} tính $a^k\bmod m$ mà không tạo số $a^k$
+      đầy đủ ($k\ge0$, $m>0$). \texttt{pow(a,-1,m)} tìm nghịch đảo
+      nếu $\gcd(a,m)=1$; nếu không sẽ phát sinh \texttt{ValueError}.
+\item \texttt{math.comb(n,k)}, \texttt{math.gcd(a,b)} và
+      \texttt{math.isqrt(n)} cho tổ hợp, UCLN và
+      $\lfloor\sqrt n\rfloor$ chính xác; \texttt{isqrt} cần $n\ge0$.
+      \texttt{comb}, \texttt{isqrt} và số mũ âm của \texttt{pow}
+      với modulo cần Python 3.8 trở lên.
+\item Trên Python 3.11 trở lên, chuyển đổi số thập phân cực dài có thể
+      vướng giới hạn chữ số. Khi đề thật sự cần, kiểm tra
+      \texttt{sys.get\_int\_max\_str\_digits()} và có thể gọi
+      \texttt{sys.set\_int\_max\_str\_digits(0)}.
+      Kiểm tra phiên bản Python của máy chấm.
+\end{itemize}
+
+\subsection{trick lỏ}
+pragma lấy trên codeforces ok
+\lstinputlisting[language=C++,basicstyle=\ttfamily\scriptsize]{code/quick_reference/pragmas.txt}
+\end{multicols}
+\endgroup

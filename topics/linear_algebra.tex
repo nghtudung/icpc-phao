@@ -1,0 +1,53 @@
+\section{Đại số tuyến tính}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Khử Gauss và số nghiệm}
+Với hệ $Ax=b$ có $n$ phương trình, $m$ ẩn, phép đổi hai hàng,
+nhân một hàng với số khác $0$, hoặc cộng bội của hàng khác
+không đổi tập nghiệm. Khử từng cột: tìm hàng có hệ số trụ
+khác $0$, đưa lên, chuẩn hóa rồi loại biến ở các hàng khác.
+Sau khử, nếu có hàng $0=b_i$ với $b_i\ne0$, hệ vô nghiệm.
+Nếu không, số biến tự do là $m-\operatorname{rank}(A)$;
+hệ có nghiệm duy nhất khi hạng bằng $m$, và vô số nghiệm
+trên trường vô hạn khi hạng nhỏ hơn $m$.
+Với số thực, chọn trụ có trị tuyệt đối lớn nhất trong cột
+để giảm sai số; $\varepsilon$ phụ thuộc thang dữ liệu.
+Nếu hệ có nghiệm vô hạn, mẫu code đặt biến tự do bằng $0$
+và trả về một nghiệm.
+
+\subsection{Khử Gauss trên GF(2)}
+Trên $\mathrm{GF}(2)$, cộng và trừ đều là XOR, nhân là AND.
+Biểu diễn mỗi hàng phương trình bằng bitmask các hệ số và một
+bit vế phải; khử bằng XOR hàng nên không có sai số số thực.
+Tiêu chuẩn vô nghiệm/hữu hạn nghiệm như trên: hàng hệ số
+bằng $0$ mà vế phải bằng $1$ là vô nghiệm; nếu có nghiệm,
+số nghiệm là $2^{m-\operatorname{rank}(A)}$.
+Mẫu code hỗ trợ tối đa $64$ ẩn và trả về một nghiệm với các
+biến tự do bằng $0$. Trong hai mẫu code, ẩn thứ nhất có chỉ số
+$0$ (bit $0$ với $\mathrm{GF}(2)$).
+
+\paragraph{Hai mẫu khử Gauss (C++17).}
+\cppsnippet{code/linear_algebra/gauss.hpp}
+
+\subsection{Lũy thừa ma trận}
+Nếu trạng thái dạng vector cột thỏa $v_{t+1}=Mv_t$, thì
+$v_t=M^t v_0$. Nhân ma trận kết hợp nhưng không giao hoán,
+nên thứ tự nhân phải giữ đúng. Lũy thừa nhị phân dùng
+$M^0=I$ và tính trong $O(d^3\log t)$ thời gian,
+$O(d^2)$ bộ nhớ với ma trận vuông cấp $d$.
+Trong bài đếm đường đi dài đúng $t$ trên đồ thị,
+$(M^t)_{uv}$ là số đường đi (walk) từ $u$ tới $v$,
+nếu $M_{uv}$ là số cạnh từ $u$ tới $v$.
+Với truy hồi tuyến tính, đưa $d$ giá trị gần nhất vào vector
+trạng thái rồi dựng ma trận chuyển tương ứng.
+Mẫu dưới lưu kích thước $m\times n$ trong \texttt{struct Matrix};
+ô đầu tiên là \texttt{d[0][0]}.
+nhân được cả ma trận chữ nhật khi số cột trái bằng số hàng phải.
+Chỉ ma trận vuông mới được lũy thừa. Đổi \texttt{MATRIX\_SIZE}
+và \texttt{MOD} theo đề, chuẩn hóa từng phần tử về $[0,\mathrm{MOD})$
+trước khi nhân. Tích trung gian dùng \texttt{\_\_int128} để tránh tràn.
+
+\paragraph{Mẫu lũy thừa ma trận (C++17).}
+\cppsnippet{code/linear_algebra/matrix.hpp}
+\end{multicols}
+\endgroup

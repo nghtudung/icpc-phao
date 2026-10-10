@@ -1,0 +1,74 @@
+\section{Số học}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Euclid mở rộng và nghịch đảo modulo}
+Với $a,b>0$, thuật toán Euclid cho $\gcd(a,b)$ bằng cách lặp
+$(a,b)\leftarrow(b,a\bmod b)$; độ phức tạp $O(\log\min(a,b))$.
+Euclid mở rộng còn tìm $x,y$ sao cho
+\[
+ax+by=\gcd(a,b).
+\]
+Nếu $g=\gcd(a,m)=1$, hệ số $x$ thỏa $ax\equiv1\pmod m$,
+nên $x\bmod m$ là nghịch đảo của $a$ modulo $m$.
+Nghịch đảo tồn tại \emph{khi và chỉ khi} $g=1$; không cần $m$
+nguyên tố. Mọi phép chia modulo $m$ phải nhân với nghịch đảo
+của mẫu, và chỉ hợp lệ khi nghịch đảo tồn tại.
+Nếu $m$ nguyên tố và $a\not\equiv0\pmod m$, cũng có thể dùng
+$a^{m-2}\bmod m$ theo định lý Fermat.
+
+Phương trình $ax\equiv b\pmod m$ có nghiệm khi và chỉ khi
+$g=\gcd(a,m)$ chia hết $b$. Khi đó chia cả ba số cho $g$,
+tìm một nghiệm modulo $m/g$, rồi có đúng $g$ nghiệm khác nhau
+modulo $m$.
+
+\subsection{Hệ phương trình đồng dư và CRT}
+Xét $x\equiv r_1\pmod{m_1}$ và $x\equiv r_2\pmod{m_2}$,
+với $m_1,m_2>0$. Đặt $g=\gcd(m_1,m_2)$. Hệ có nghiệm
+\emph{khi và chỉ khi} $g\mid(r_2-r_1)$.
+Viết $x=r_1+m_1t$ và chia đồng dư thứ hai cho $g$:
+\[
+\frac{m_1}{g}t\equiv\frac{r_2-r_1}{g}
+\pmod{\frac{m_2}{g}}.
+\]
+Hai hệ số $m_1/g,m_2/g$ nguyên tố cùng nhau, nên tìm được
+$t$ bằng Euclid mở rộng. Mọi nghiệm tạo một lớp modulo
+$\operatorname{lcm}(m_1,m_2)$; ghép lần lượt nhiều phương trình.
+Nếu các modulo đôi một nguyên tố cùng nhau, điều kiện tồn tại
+luôn đúng và modulo kết quả là tích các modulo.
+Kiểm tra tràn khi nhân modulo; chuẩn hóa phần dư về $[0,m)$,
+kể cả khi dữ liệu ban đầu âm.
+
+\paragraph{Mẫu C++17.}
+\texttt{inverseMod} trả rỗng nếu không có nghịch đảo;
+\texttt{mergeCRT} trả rỗng nếu hệ vô nghiệm, và ném lỗi nếu
+modulo kết quả vượt \texttt{long long}. CRT cần modulo dương;
+\texttt{inverseMod} chỉ xét $m\ge2$ và trả rỗng nếu $m\le1$.
+\texttt{extendedGcd} nhận $a,b\ge0$, không đồng thời bằng $0$.
+\cppsnippet{code/number_theory/crt.hpp}
+
+\subsection{Số nguyên lớn trong C++ và Python}
+Nếu kết quả vượt \texttt{long long} và không thể chỉ giữ modulo,
+Python có kiểu \texttt{int} độ dài tùy ý; các phép
+\texttt{+,-,*,//,\%}, \texttt{pow(a,b,m)} và
+\texttt{math.comb(n,k)} dùng trực tiếp.
+Trong C++, có thể dùng
+\texttt{boost::multiprecision::cpp\_int}; ví dụ
+\texttt{cpp\_int x = 1; x <<= 200;} tạo số $2^{200}$.
+Kiểu này hỗ trợ cộng, trừ,
+nhân, chia và nhập xuất như số nguyên thông thường, nhưng chi
+phí thời gian và bộ nhớ lớn hơn kiểu máy. Phải kiểm tra quy định
+ngôn ngữ/thư viện của kỳ thi trước khi dựa vào Boost hoặc Python.
+Nếu chỉ cần tránh tràn \emph{trung gian}, dùng
+\texttt{\_\_int128} rồi ép về kiểu nhỏ sau khi đã kiểm tra giới hạn.
+
+\paragraph{BigNum tự cài bằng chuỗi (C++17).}
+Lưu trị tuyệt đối dạng thập phân và một bit dấu; chuẩn hóa số $0$
+thành \texttt{val="0", negative=false}. So sánh độ lớn theo số chữ số,
+sau đó so từ điển. Cộng/trừ xử lý dấu rồi cộng/trừ trị tuyệt đối;
+nhân từng chữ số, nhớ sang hàng kế tiếp. Cộng, trừ tốn $O(n)$;
+nhân kiểu cơ bản tốn $O(nm)$ với hai toán hạng dài $n,m$ chữ số.
+Mẫu hỗ trợ nhập, in, so sánh, \texttt{+}, \texttt{-}, \texttt{*};
+không có phép chia. Khi được phép, \texttt{cpp\_int} thường tiện hơn.
+\cppsnippet{code/number_theory/bignum.hpp}
+\end{multicols}
+\endgroup

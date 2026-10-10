@@ -1,0 +1,44 @@
+\section{Logic trên đồ thị}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Mệnh đề và đồ thị kéo theo}
+Trong 2-SAT, mỗi điều kiện là một mệnh đề có tối đa hai literal,
+ví dụ $(a\lor b)$. Một literal là biến $x$ hoặc phủ định
+$\neg x$. Mệnh đề tương đương hai kéo theo
+$\neg a\Rightarrow b$ và $\neg b\Rightarrow a$.
+Biểu diễn mỗi literal bằng một đỉnh; phủ định là đỉnh ghép cặp.
+Một đường đi $p\leadsto q$ nghĩa là nếu chọn $p$ đúng thì
+buộc $q$ đúng. Với một yêu cầu đơn $a$, thêm $(a\lor a)$.
+Khi thêm yêu cầu $a\Rightarrow b$, phải thêm cả cạnh
+$a\to b$ và cạnh phản đảo $\neg b\to\neg a$;
+hàm \texttt{implication(a,b)} bên dưới thực hiện đủ hai cạnh.
+Với yêu cầu $a\Leftrightarrow b$, thêm hai chiều kéo theo;
+với yêu cầu đúng đúng một trong hai, thêm
+$(a\lor b)\land(\neg a\lor\neg b)$.
+
+\subsection{Bài toán 2-SAT}
+Tạo đồ thị kéo theo $2n$ đỉnh, tìm các thành phần liên thông
+mạnh (SCC). Công thức có nghiệm khi và chỉ khi không có biến
+$x$ nào mà $x$ và $\neg x$ cùng SCC: nếu cùng SCC, chọn một
+giá trị sẽ kéo theo phủ định của chính nó. Chiều ngược lại
+suy ra bằng cách xét DAG các SCC theo thứ tự tô pô và chọn
+một trong mỗi cặp SCC phủ định. Độ phức tạp $O(n+m)$ với
+$m$ mệnh đề. Ràng buộc có ba literal trở lên không được đưa
+thẳng vào mô hình 2-SAT; SAT tổng quát khó hơn về bản chất.
+
+\subsection{Dựng và đọc một nghiệm}
+Trong mẫu code, biến đánh số $i\in[0,n)$; dùng đỉnh $2i$
+cho $\neg x_i$, $2i+1$ cho $x_i$,
+nên phủ định một literal là XOR với $1$. Kosaraju tạo số SCC
+tăng dần theo thứ tự tô pô của DAG SCC; đặt
+$x_i=[\operatorname{comp}(x_i)>
+\operatorname{comp}(\neg x_i)]$.
+Quy ước so sánh có thể đảo nếu đổi cách đánh số SCC, vì thế
+nên kiểm bằng mệnh đề đơn $(x)$ và $(\neg x)$.
+\texttt{solve()} trả rỗng khi vô nghiệm, ngược lại là vector
+$0/1$ của các biến.
+
+\paragraph{Mẫu 2-SAT (C++17).}
+\cppsnippet{code/graph_logic/two_sat.hpp}
+\end{multicols}
+\endgroup

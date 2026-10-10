@@ -1,0 +1,81 @@
+\section{Tổ hợp}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Tổ hợp và đếm cách phân phối}
+Với $0\le k\le n$, số cách chọn $k$ trong $n$ phần tử phân biệt,
+không xét thứ tự, là
+\[
+\binom nk=\frac{n!}{k!(n-k)!},\qquad
+\binom nk=\binom{n-1}{k-1}+\binom{n-1}k.
+\]
+Quy ước $\binom nk=0$ nếu $k<0$ hoặc $k>n$.
+Số hoán vị của đa tập có $n_i$ phần tử loại $i$ và
+$\sum_i n_i=n$ là $n!/\prod_i n_i!$.
+
+Số nghiệm nguyên không âm của $x_1+\cdots+x_m=s$ là
+$\binom{s+m-1}{m-1}$ khi $m\ge1,s\ge0$ (đặt $m-1$ vách ngăn).
+Nếu $x_i\ge l_i$, thay $y_i=x_i-l_i$.
+Nếu thêm $x_i\le u_i$, đặt $t=s-\sum_i l_i$,
+$b_i=u_i-l_i\ge0$. Số nghiệm là
+\[
+\sum_{J\subseteq[m]}(-1)^{|J|}
+\binom{t-\sum_{j\in J}(b_j+1)+m-1}{m-1}.
+\]
+Đây là bao hàm--loại trừ trên các điều kiện xấu $y_i>b_i$.
+Nếu $t<0$, đáp án bằng $0$.
+
+\subsection{Số Catalan}
+Đặt $C_0=1$. Tách dãy ngoặc đúng theo cặp ngoặc đầu tiên:
+\[
+C_n=\sum_{i=0}^{n-1}C_iC_{n-1-i}
+=\binom{2n}{n}-\binom{2n}{n+1}
+=\frac{1}{n+1}\binom{2n}{n}.
+\]
+$C_n$ đếm dãy ngoặc đúng $n$ cặp, đường đi lưới từ
+$(0,0)$ tới $(n,n)$ với mọi tiền tố giữ $y\le x$,
+và số cách tam giác hóa đa giác lồi $n+2$ đỉnh (với $n\ge1$).
+Hiệu hai hệ số nhị thức suy ra từ nguyên lý phản xạ.
+Khi tính modulo $M$, không chia cho $n+1$ nếu nó không khả nghịch;
+dùng hiệu hai hệ số nhị thức hoặc cách khác thích hợp.
+
+\subsection{Bao hàm--loại trừ}
+Với các tập hữu hạn $A_1,\ldots,A_k$,
+\[
+\left|\bigcup_{i=1}^k A_i\right|=
+\sum_{\varnothing\ne J\subseteq[k]}(-1)^{|J|+1}
+\left|\bigcap_{j\in J}A_j\right|.
+\]
+Một phần tử nằm trong đúng $r\ge1$ tập được tính với hệ số
+$\sum_{j=1}^r(-1)^{j+1}\binom rj=1$.
+Để đếm đối tượng không mắc điều kiện xấu nào, lấy toàn bộ
+trừ số đối tượng thuộc hợp. Phương pháp trực tiếp có $2^k$
+giao, chỉ dùng khi số điều kiện đủ nhỏ hoặc có thể gom các
+tập con theo một đại lượng chung.
+
+\subsection{Định lý Burnside}
+Nhóm hữu hạn $G$ tác động lên tập cấu hình hữu hạn $X$; hai
+cấu hình tương đương nếu một phép trong $G$ biến cấu hình này
+thành cấu hình kia. Số lớp tương đương:
+\[
+|X/G|=\frac{1}{|G|}\sum_{g\in G}|\operatorname{Fix}(g)|,\qquad
+\operatorname{Fix}(g)=\{x:g(x)=x\}.
+\]
+Đếm các cặp $(g,x)$ với $g(x)=x$ theo $g$ cho tổng ở tử;
+theo định lý quỹ đạo--ổn định, mỗi lớp đóng góp $|G|$ cặp.
+Nếu $g$ hoán vị $n$ vị trí và tô bằng $q$ màu, cấu hình cố định
+phải có cùng màu trên mỗi chu trình, nên
+$|\operatorname{Fix}(g)|=q^{c(g)}$. Tô vòng $n$ ô, chỉ đồng nhất
+theo phép quay, cho
+\[
+\frac1n\sum_{r=0}^{n-1}q^{\gcd(n,r)}.
+\]
+Nếu còn đồng nhất qua phép lật, phải cộng các phép lật vào nhóm.
+Khi tính modulo, phép chia cho $|G|$ bằng nghịch đảo chỉ hợp lệ
+nếu $\gcd(|G|,M)=1$.
+
+\paragraph{Hệ số nhị thức modulo số nguyên tố (C++17).}
+Yêu cầu $p$ nguyên tố và $0\le N<p$; sau tiền xử lý $O(N)$,
+mỗi truy vấn $O(1)$. Hàm Catalan cần $2n\le N$.
+\cppsnippet{code/combinatorics/binomial.hpp}
+\end{multicols}
+\endgroup

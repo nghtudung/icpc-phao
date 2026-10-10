@@ -1,0 +1,24 @@
+#pragma GCC optimize("Ofast,unroll-loops") // C: Ofast bat fast-math; unroll co the cham hon.
+#pragma GCC target("avx2,popcnt,lzcnt,abm,bmi,bmi2,fma,tune=native") // C: x86, phu thuoc GCC/CPU; co the CE hoac loi lenh CPU.
+#pragma GCC optimize(3) // B: O3; do toc do, khong dam bao nhanh hon O2.
+#pragma GCC target("avx,avx2") // B: chi dung khi may cham x86 ho tro AVX2.
+#pragma GCC optimize("Ofast") // C: hop le, nhung fast-math co the doi ket qua so thuc.
+#pragma GCC optimize("inline") // C: cho phep inline, khong ep moi ham inline.
+#pragma GCC optimize("-fgcse") // C: thuong da bat o O2, khong can them.
+#pragma GCC optimize("-ffast-math") // C: co the pha gia thiet ve so thuc/NaN/Inf.
+#pragma GCC optimize("-fsched-spec") // C: thuong khong can chinh scheduling thu cong.
+#pragma GCC optimize("-funroll-loops") // B: do toc do, tang kich thuoc code.
+#pragma GCC optimize("-falign-labels") // C: can chinh alignment thuong khong can.
+#pragma GCC optimize("-funroll-loops") // C: trung dong unroll-loops o tren.
+#pragma GCC optimize("Ofast,fast-math") // C: fast-math da nam trong Ofast; trung lap va rui ro.
+#pragma GCC optimize("-fschedule-insns") // C: loi ich phu thuoc kien truc.
+#pragma GCC optimize("-finline-functions") // C: compiler da tu chon inline o muc toi uu.
+#pragma GCC optimize("-fstrict-aliasing") // C: thuong da bat, phai tuan thu luat aliasing.
+#pragma GCC optimize("-fcse-follow-jumps") // C: toi uu cap thap, thuong khong can.
+#pragma GCC optimize("-fsched-interblock") // C: scheduling phu thuoc kien truc.
+#pragma GCC optimize("no-stack-protector") // C: tat bao ve stack, thuong khong dang dung.
+#pragma GCC optimize("-freorder-functions") // C: thuong khong can chinh tay.
+#pragma GCC optimize("-finline-small-functions") // C: thuong da duoc compiler xu ly.
+#pragma GCC optimize("-finline-functions-called-once") // C: thuong da bat tu O1.
+#pragma GCC optimize("-fdelete-null-pointer-checks") // C: dereference null van la UB, khong duoc dua vao.
+#pragma GCC optimize(2) // A: O2; du neu judge da bat, khong can chep them.

@@ -1,0 +1,117 @@
+\section{Hình học}
+\begingroup\small
+\begin{multicols}{2}
+
+\subsection{Điểm, vector, tích vô hướng và tích có hướng}
+Điểm $P=(x,y)$ cũng biểu diễn vector từ gốc tọa độ tới $P$.
+Với $A,B$ là hai điểm, $\overrightarrow{AB}=B-A$.
+Đường thẳng qua hai điểm \emph{phân biệt} $A,B$ có dạng tham số
+$P(t)=A+t(B-A)$, $t\in\mathbb R$; đoạn $AB$ tương ứng
+$0\leq t\leq1$. Đường tròn tâm $O$, bán kính $r\geq0$ gồm các
+điểm thỏa $(x-O_x)^2+(y-O_y)^2=r^2$.
+
+Với $u=(u_x,u_y)$ và $v=(v_x,v_y)$:
+\[
+u\cdot v=u_xv_x+u_yv_y,\qquad
+u\times v=u_xv_y-u_yv_x.
+\]
+$u\cdot v$ cho góc, hình chiếu và khoảng cách;
+$u\times v$ cho hướng quay và hai lần diện tích tam giác.
+Đặt $\operatorname{orient}(A,B,C)=(B-A)\times(C-A)$:
+giá trị dương là rẽ trái (ngược chiều kim đồng hồ), âm là rẽ phải,
+bằng $0$ là thẳng hàng. Với tọa độ nguyên, hãy xét dấu \emph{chính xác}
+thay vì dùng $\varepsilon$.
+
+\subsection{Đường thẳng, đoạn thẳng và giao điểm}
+Đường thẳng qua $P_1=(x_1,y_1)$, $P_2=(x_2,y_2)$ cũng có thể viết
+$Ax+By=C$, trong đó
+\[
+A=y_2-y_1,\quad B=x_1-x_2,\quad C=Ax_1+By_1.
+\]
+Với $L_1=P+tu$, $L_2=Q+sv$, nếu $u\times v\ne0$ thì giao điểm duy
+nhất là
+\[
+P+u\,\frac{(Q-P)\times v}{u\times v}.
+\]
+Nếu $u\times v=0$, hai đường song song hoặc trùng nhau; kiểm tra thêm
+$(Q-P)\times u=0$ để nhận biết trùng nhau. Không áp dụng công thức
+cho đường có vector chỉ phương bằng $0$.
+
+Đường thẳng $AB$ cắt đoạn $CD$ tại một điểm nếu $C,D$ ở hai phía
+khác nhau hoặc có đầu mút trên đường; nếu cả hai cùng nằm trên
+đường thì giao là cả đoạn (hoặc một điểm nếu $C=D$). Với
+\emph{hai đoạn}, trước hết xét dấu
+$\operatorname{orient}$ của mỗi cặp đầu mút đối với đường chứa
+đoạn kia; trường hợp bằng $0$ phải kiểm tra đầu mút có nằm trong
+hộp tọa độ của đoạn hay không. Code bên dưới tính cả trường hợp
+chạm đầu mút, chồng đoạn và đoạn chỉ có một điểm.
+
+\subsection{Khoảng cách}
+Với $u=B-A\ne0$, khoảng cách từ $Q$ tới đường thẳng $AB$ là
+\[
+d(Q,AB)=\frac{|u\times(Q-A)|}{\lVert u\rVert}.
+\]
+Với \emph{đoạn} $AB$, lấy $t=((Q-A)\cdot u)/(u\cdot u)$ rồi chặn
+$t$ vào $[0,1]$; điểm gần nhất là $A+tu$. Nếu $A=B$, khoảng cách
+là $\lVert Q-A\rVert$. So sánh khoảng cách bình phương khi không
+cần chính giá trị căn bậc hai.
+
+\subsection{Diện tích đa giác đơn}
+Cho đa giác \emph{không tự cắt} có $n$ đỉnh $P_0,\ldots,P_{n-1}$
+theo thứ tự quanh biên; đặt $P_n=P_0$. Hai cách viết tương đương của
+\emph{hai lần diện tích có dấu} là
+\[
+S_2=\sum_{i=0}^{n-1}(x_i y_{i+1}-x_{i+1}y_i)
+=\sum_{i=0}^{n-1}(x_i-x_{i+1})(y_i+y_{i+1}).
+\]
+Hai tổng bằng nhau vì các hạng $x_i y_i$ triệt tiêu khi lấy tổng
+theo chu trình. $S_2>0$ khi duyệt ngược chiều kim đồng hồ, $S_2<0$
+khi duyệt thuận chiều; diện tích là $|S_2|/2$. Với tọa độ nguyên,
+$S_2$ nguyên nên diện tích là số nguyên hoặc số nguyên cộng $0.5$.
+Nếu đa giác tự cắt, $|S_2|/2$ nói chung không phải diện tích miền.
+
+\subsection{Bao lồi: Graham scan}
+Bao lồi là tập lồi nhỏ nhất chứa mọi điểm; nếu không suy biến,
+nó là một đa giác lồi. Graham scan: bỏ điểm
+trùng, chọn đỉnh thấp nhất (nếu hòa chọn trái nhất), sắp xếp các
+điểm còn lại theo góc cực quanh đỉnh đó, rồi duy trì một stack;
+khi ba điểm cuối không rẽ trái thì bỏ điểm giữa. Với các điểm cùng
+tia, sắp xếp gần trước và loại điểm gần. Độ phức tạp $O(n\log n)$;
+code trả các đỉnh theo chiều ngược kim đồng hồ, không lặp đỉnh đầu,
+và bỏ các điểm thẳng hàng nằm giữa trên cạnh. Nếu mọi điểm thẳng
+hàng, kết quả là hai đầu mút (hoặc một điểm nếu tất cả trùng nhau).
+
+\paragraph{Cài đặt số nguyên (C++17).}
+Các phép nhân và hiệu tọa độ được nâng lên \texttt{\_\_int128}
+trước khi tính; vẫn cần kiểm tra giới hạn dữ liệu để tổng cuối không
+vượt kiểu này. \texttt{polygonArea2} dùng đúng công thức $S_2$ ở trên.
+\cppsnippet{code/geometry/integer.hpp}
+
+\subsection{Đường tròn}
+Để cắt đường thẳng $L=P+tu$ với đường tròn $(O,r)$, lấy hình chiếu
+$H=P+u\,((O-P)\cdot u)/(u\cdot u)$ và $d^2=\lVert H-O\rVert^2$.
+Nếu $d^2>r^2$ không có giao; bằng nhau thì tiếp xúc tại $H$;
+nhỏ hơn thì hai giao điểm là
+\[
+H\pm u\sqrt{\frac{r^2-d^2}{u\cdot u}}.
+\]
+Muốn giao với \emph{đoạn}, chỉ giữ các nghiệm có tham số $t\in[0,1]$.
+
+\paragraph{Cài đặt số thực (C++17).}
+\texttt{Line} dùng điểm $p$ và vector hướng $v$; \texttt{Circle} dùng
+tâm và bán kính. Hàm giao hai đường trả rỗng cho cả song song lẫn
+trùng nhau, nên cần kiểm tra riêng nếu bài đòi phân biệt hai trường
+hợp. Vector hướng của đường phải khác $0$.
+\cppsnippet{code/geometry/real.hpp}
+
+\subsection{Sai số số thực và các trường hợp suy biến}
+Dùng phép tính nguyên và \texttt{\_\_int128} cho hướng quay, giao
+đoạn, bao lồi và diện tích khi tọa độ nguyên; kiểm tra giới hạn
+để tránh tràn ngay cả với kiểu này. Khi cần giao điểm hoặc căn bậc
+hai, dùng \texttt{long double} và chọn $\varepsilon$ theo thang tọa độ
+của bài. Không dùng so sánh có $\varepsilon$ trong comparator của
+\texttt{sort}, vì có thể phá tính bắc cầu. Cần xét riêng đường thẳng
+không hợp lệ, đoạn độ dài $0$, điểm thẳng hàng và trường hợp tiếp xúc.
+
+\end{multicols}
+\endgroup

@@ -1,0 +1,53 @@
+\section{Lý thuyết trò chơi}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Trạng thái thắng, thua và hòa}
+Xét trò chơi hai người, thông tin hoàn hảo, không ngẫu nhiên, cùng
+tập nước đi cho cả hai người; ai \emph{không đi được} ở lượt mình
+thì thua (quy tắc chơi chuẩn). Với đồ thị trạng thái không chu trình,
+đặt $W(s)$ là trạng thái thắng của người sắp đi. Trạng thái không
+có nước đi là thua; trạng thái có ít nhất một cạnh tới trạng thái
+thua là thắng; nếu mọi cạnh tới trạng thái thắng thì là thua.
+Tính theo thứ tự topo ngược. Nếu cần giá trị điểm thay vì thắng/thua,
+dùng minimax với quy ước giá trị nhất quán theo người chơi.
+
+\subsection{Nim}
+Với các đống có kích thước $a_1,\ldots,a_k$, mỗi lượt giảm đúng
+một đống đi một lượng dương. Gọi $x=a_1\oplus\cdots\oplus a_k$.
+Trạng thái thua khi và chỉ khi $x=0$. Nếu $x=0$, mọi nước đi
+đều làm XOR khác $0$. Nếu $x\ne0$, chọn bit cao nhất bật trong
+$x$, tìm đống $a_i$ có bit ấy bật, và đổi nó thành
+$a_i'=a_i\oplus x<a_i$ để XOR mới bằng $0$.
+Kết luận này dùng quy tắc chơi chuẩn. Với misère Nim (ai lấy viên
+cuối cùng thì thua): nếu mọi đống khác rỗng đều có kích thước $1$,
+người sắp đi thua khi số đống đó lẻ; nếu còn đống lớn hơn $1$,
+tiêu chuẩn thắng vẫn là XOR khác $0$.
+
+\subsection{Số Grundy và mex}
+Với trò chơi vô tư hữu hạn, không chu trình, định nghĩa
+\[
+g(s)=\operatorname{mex}\{g(t):s\to t\},\qquad
+\operatorname{mex}(S)=\min\{z\ge0:z\notin S\}.
+\]
+Trạng thái hết nước đi có $g=0$; $g(s)=0$ đúng khi $s$ thua.
+Nếu một lượt chỉ được đi trong \emph{một} trong nhiều trò chơi
+độc lập, định lý Sprague--Grundy cho
+$g_{\rm tổng}=g_1\oplus\cdots\oplus g_k$.
+Không dùng XOR này khi một nước đi có thể thay đổi đồng thời nhiều
+thành phần, hoặc khi luật chơi là misère mà chưa biến đổi riêng.
+
+\subsection{Trò chơi trên đồ thị có chu trình}
+Trên đồ thị hữu hạn có chu trình, quy hoạch động topo không còn
+hợp lệ. Đánh dấu các đỉnh hết nước là thua, rồi lan ngược:
+tiền nhiệm của đỉnh thua là thắng; tiền nhiệm mà \emph{mọi} nước đi
+đều tới đỉnh thắng là thua. Các đỉnh chưa được đánh dấu có thể
+duy trì ván đấu mãi mãi, nên là hòa nếu chơi tối ưu theo quy ước
+không kết thúc là hòa. Cần xác định rõ luật của đề: trò chơi có
+giới hạn lượt hoặc có trạng thái lặp bị xử thua sẽ cho kết quả khác.
+
+\paragraph{Mẫu C++17.}
+\texttt{grundyDAG} nhận thứ tự topo; \texttt{gameOutcome} trả
+$0$ thua, $1$ thắng, $2$ hòa. Hai hàm nhận đỉnh $[0,n)$.
+\cppsnippet{code/game_theory/game.hpp}
+\end{multicols}
+\endgroup

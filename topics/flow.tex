@@ -1,0 +1,90 @@
+\section{Luồng và lát cắt}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Mô hình mạng luồng}
+Mạng có nguồn $s$, đích $t$, mỗi cạnh $e=(u,v)$ có sức chứa
+$c_e\ge0$. Luồng $f_e$ thỏa $0\le f_e\le c_e$ và tại mọi đỉnh
+khác $s,t$, tổng luồng vào bằng tổng luồng ra.
+Giá trị luồng là luồng ròng ra khỏi $s$.
+Đồ thị thặng dư chứa cạnh thuận sức chứa $c_e-f_e$ và cạnh
+ngược sức chứa $f_e$; đi cạnh ngược nghĩa là hủy bớt luồng
+đã gửi. Mỗi cạnh được thêm vào code tạo một cặp cạnh thặng dư.
+
+\subsection{Luồng cực đại và lát cắt cực tiểu}
+Lát cắt $(S,V\setminus S)$ thỏa $s\in S,t\notin S$ có sức chứa
+$\sum_{u\in S,v\notin S}c(u,v)$. Mọi luồng có giá trị không
+vượt sức chứa mọi lát cắt. Khi không còn đường tăng từ $s$
+tới $t$ trong đồ thị thặng dư, tập đỉnh còn tới được từ $s$
+cho một lát cắt có sức chứa đúng bằng giá trị luồng;
+đó là định lý max-flow min-cut.
+Nếu mọi sức chứa nguyên, tồn tại luồng cực đại nguyên.
+
+\subsection{Thuật toán Dinic}
+Lặp: BFS trên cạnh thặng dư dương để tạo đồ thị mức;
+DFS chỉ đi cạnh làm mức tăng $1$ để đẩy một luồng chặn.
+Khi không tới được $t$, dừng. Mỗi pha xóa các đường ngắn nhất
+trong đồ thị thặng dư; số pha không quá $V-1$, độ phức tạp tổng
+quát $O(V^2E)$. Mẫu code nhận đỉnh $[0,n)$, yêu cầu $s\ne t$;
+\texttt{maxflow} trả lượng luồng đẩy thêm trong lần gọi hiện tại,
+\texttt{minCutSide} trả các đỉnh ở phía nguồn của lát cắt tối tiểu
+sau khi chạy luồng cực đại.
+Tổng luồng phải vừa \texttt{long long}; DFS đệ quy có thể sâu $O(V)$.
+
+\paragraph{Mẫu Dinic (C++17).}
+\cppsnippet{code/flow/dinic.hpp}
+
+\subsection{Các mẫu dựng mạng từ đề bài}
+Đường đi không chung cạnh: đặt sức chứa $1$ trên mỗi cạnh.
+Không chung đỉnh: tách $v$ thành $v_{\rm in}\to v_{\rm out}$
+sức chứa $1$, trừ nguồn/đích nếu được dùng nhiều lần.
+Ghép cặp hai phía: $s\to L$, $L\to R$, $R\to t$, mọi cạnh
+sức chứa $1$. Chọn dự án có lãi $w_i$: nếu $w_i>0$, nối
+$s\to i$ sức chứa $w_i$; nếu $w_i<0$, nối $i\to t$
+sức chứa $-w_i$; điều kiện chọn $i$ buộc chọn $j$ tạo cạnh
+$i\to j$ sức chứa \emph{lớn hơn tổng mọi lãi dương}.
+Đáp án là tổng lãi dương trừ sức chứa lát cắt tối thiểu.
+Tính ngưỡng vô cực theo dữ liệu, tránh tràn số.
+
+\subsection{Luồng có cận dưới}
+Với $l_e\le f_e\le u_e$, đặt $f_e=l_e+f'_e$,
+$0\le f'_e\le u_e-l_e$. Với mỗi cạnh $u\to v$, cộng
+$d_v\mathrel{+}=l_e$, $d_u\mathrel{-}=l_e$.
+Thêm siêu nguồn $S$: nếu $d_v>0$, thêm $S\to v$ sức chứa
+$d_v$; nếu $d_v<0$, thêm $v\to T$ sức chứa $-d_v$.
+Tồn tại lưu thông hợp lệ khi và chỉ khi luồng cực đại từ
+$S$ tới $T$ bão hòa toàn bộ cạnh đi ra $S$.
+Để tìm luồng $s$--$t$ không âm, thêm cạnh phụ $t\to s$ sức chứa
+đủ lớn trước khi kiểm tra. Nếu khả thi, gọi $F_0$ là luồng trên
+cạnh phụ. Muốn tối đa hóa: xóa các cạnh nối siêu nguồn/đích
+và cạnh phụ $t\to s$, \emph{kể cả các cạnh ngược tương ứng};
+giữ các cạnh dư của mạng gốc rồi đẩy thêm luồng từ $s$ tới $t$.
+Đáp án là $F_0$ cộng lượng đẩy thêm, và $f_e=l_e+f'_e$.
+
+\subsection{Luồng chi phí cực tiểu}
+Mỗi cạnh còn có chi phí $w_e$ cho một đơn vị luồng; cạnh
+ngược trong đồ thị thặng dư có chi phí $-w_e$.
+Để tìm luồng $F$ đơn vị có chi phí nhỏ nhất, lặp đường ngắn
+nhất $s\to t$ trong đồ thị thặng dư và đẩy theo sức chứa nút cổ
+chai; dừng khi đủ $F$ hoặc không còn đường. Với thế đỉnh
+$\pi$, chi phí giảm của cạnh là
+$w'(u,v)=w(u,v)+\pi_u-\pi_v$. Sau khi khởi tạo thế bằng
+Bellman--Ford, các chi phí giảm trên phần tới được không âm,
+nên có thể dùng Dijkstra mỗi pha.
+Mẫu dưới khởi tạo Bellman--Ford từ một siêu nguồn ngầm nối tới
+mọi đỉnh, và từ chối mạng dư ban đầu có chu trình chi phí âm,
+kể cả ở thành phần rời nguồn. Chu trình âm có sức chứa hữu hạn
+không đồng nghĩa đáp án $-\infty$, nhưng cần thuật toán xử lý
+lưu thông âm riêng. Mẫu code nhận đỉnh $[0,n)$, yêu cầu
+$s\ne t$, lượng cần gửi không âm.
+Hàm trả lượng đẩy thêm và chi phí của lượng đó; khi không đủ
+đường đi, lượng trả về có thể nhỏ hơn yêu cầu.
+Chi phí, khoảng cách và thế đỉnh dùng \texttt{\_\_int128};
+tổng chi phí phải vừa kiểu này. Với $A$ lần tăng luồng,
+thời gian là $O(VE+A E\log V)$.
+Số pha có thể lớn; khi $F$ rất lớn, cần phân tích giới hạn
+cụ thể trước khi chọn thuật toán này.
+
+\paragraph{Mẫu min-cost flow (C++17).}
+\cppsnippet{code/flow/min_cost_flow.hpp}
+\end{multicols}
+\endgroup

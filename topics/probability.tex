@@ -1,0 +1,105 @@
+\section{Xác suất và kỳ vọng}
+\begingroup\small
+\begin{multicols}{2}
+
+\subsection{Xác suất có điều kiện và tính độc lập}
+Khi các kết quả trong không gian mẫu $\Omega$ đồng khả năng,
+$\Pr(A)=|A|/|\Omega|$; chỉ dùng phép đếm này khi giả thiết
+\emph{đồng khả năng} thực sự đúng. Chẳng hạn, chọn đều $k$ phần tử
+khác nhau từ $N$ phần tử, trong đó $M$ phần tử được đánh dấu:
+\[
+\Pr(\text{tất cả đều được đánh dấu})
+=\frac{\binom Mk}{\binom Nk}.
+\]
+Công thức trên chỉ áp dụng khi $\binom Nk>0$.
+
+Với $\Pr(B)>0$,
+\[
+\Pr(A\mid B)=\frac{\Pr(A\cap B)}{\Pr(B)},\qquad
+\Pr(A\cap B)=\Pr(A)\Pr(B\mid A)\quad(\Pr(A)>0).
+\]
+Nếu $B_1,\ldots,B_m$ là một phân hoạch của $\Omega$ với
+$\Pr(B_i)>0$, công thức xác suất toàn phần và Bayes là
+\[
+\Pr(A)=\sum_i\Pr(A\mid B_i)\Pr(B_i),\quad
+\Pr(B_j\mid A)=
+\frac{\Pr(A\mid B_j)\Pr(B_j)}{\Pr(A)}
+\]
+(vế sau yêu cầu $\Pr(A)>0$).
+Hai biến cố $A,B$ độc lập khi
+$\Pr(A\cap B)=\Pr(A)\Pr(B)$.
+\emph{Xung khắc} nghĩa là $A\cap B=\varnothing$; hai khái niệm
+này khác nhau. Khi lấy mẫu không hoàn lại, các lần chọn thường
+không độc lập.
+
+\subsection{Biến chỉ báo và tính tuyến tính của kỳ vọng}
+Với biến ngẫu nhiên rời rạc $X$ có kỳ vọng hữu hạn,
+$\mathbb E[X]=\sum_x x\Pr(X=x)$. Đặt $I_A=1$ nếu $A$ xảy ra,
+bằng $0$ nếu không; khi đó $\mathbb E[I_A]=\Pr(A)$.
+Nếu $X$ đếm số đối tượng thỏa tính chất nào đó, viết
+$X=\sum_i I_i$ để được
+\[
+\mathbb E[X]=\sum_i\Pr(I_i=1).
+\]
+Tính tuyến tính $\mathbb E[\sum_iX_i]=\sum_i\mathbb E[X_i]$
+\emph{không đòi hỏi các biến độc lập}. Ví dụ: chọn đều $k$ trong
+$N$ phần tử, $M$ phần tử được đánh dấu. Số phần tử đánh dấu được
+chọn có kỳ vọng $M\cdot k/N$.
+
+Nếu $X$ nhận giá trị nguyên không âm và có kỳ vọng hữu hạn,
+\[
+\mathbb E[X]=\sum_{t\ge1}\Pr(X\ge t).
+\]
+Công thức này hữu ích khi xác suất của biến cố đạt ít nhất
+$t$ dễ tính hơn phân phối của $X$.
+
+\subsection{Quy hoạch động xác suất}
+Đặt $f_i(k)$ là xác suất có đúng $k$ lần thành công sau $i$
+phép thử Bernoulli \emph{độc lập}, với xác suất thành công ở lần
+$i$ là $p_i$. Điều kiện đầu $f_0(0)=1$, còn lại bằng $0$.
+Tách theo kết quả lần thử cuối:
+\[
+f_i(k)=(1-p_i)f_{i-1}(k)+p_i f_{i-1}(k-1).
+\]
+Duyệt $k$ giảm dần để cập nhật tại chỗ; kết quả có
+$\sum_{k=0}^n f_n(k)=1$. Thời gian $O(n^2)$, bộ nhớ $O(n)$.
+
+Tổng quát hơn, nếu trạng thái chuyển theo đồ thị có hướng
+không chu trình, $\Pr(v)\mathrel{+}=\Pr(u)p(u,v)$ theo thứ tự
+tô pô. Tổng xác suất các cạnh đi ra trạng thái chưa kết thúc phải
+bằng $1$. Nếu có chu trình, không được dùng một lượt tô pô.
+
+\subsection{Quy hoạch động và phương trình kỳ vọng}
+Gọi $E_s$ là tổng chi phí kỳ vọng từ trạng thái $s$ tới khi kết
+thúc; $c_s$ là chi phí ngay tại $s$. Theo bước chuyển đầu tiên,
+\[
+E_s=c_s+\sum_t p(s,t)E_t,\qquad E_{\rm terminal}=0.
+\]
+Trên đồ thị không chu trình, tính $E_s$ theo thứ tự tô pô ngược.
+Nếu chỉ có cạnh tự quay lại $s$ với xác suất $p(s,s)$, chuyển vế:
+\[
+E_s=\frac{c_s+\sum_{t\ne s}p(s,t)E_t}{1-p(s,s)}
+\quad\text{khi }p(s,s)<1.
+\]
+Ví dụ mỗi lần thử thành công với xác suất $q>0$, số lần thử kỳ vọng
+đến thành công thỏa $E=1+(1-q)E$, nên $E=1/q$.
+
+Với chu trình giữa nhiều trạng thái, lập hệ tuyến tính
+$(I-P)E=c$ trên các trạng thái chưa kết thúc. Trước khi giải,
+cần xét khả năng không bao giờ tới trạng thái kết thúc: nếu điều
+này có xác suất dương và chi phí mỗi bước bị chặn dưới bởi
+một hằng số dương, kỳ vọng là
+vô hạn. Không chia cho $1-p(s,s)$ nếu vẫn còn phụ thuộc vòng
+giữa các trạng thái khác.
+
+\paragraph{Mẫu C++17.}
+Hàm thứ nhất tính phân phối số lần thành công; hàm thứ hai tính
+kỳ vọng trên đồ thị không chu trình. \texttt{order} là một thứ tự
+tô pô hợp lệ, \texttt{cost} là chi phí mỗi trạng thái, và trạng
+thái kết thúc có chi phí $0$, không có cạnh đi ra.
+Trong \texttt{expectedDAG}, các trạng thái được đánh số $[0,n)$;
+\texttt{bernoulliCount} nhận \texttt{p[0]} cho phép thử thứ nhất.
+\cppsnippet{code/probability/dp.hpp}
+
+\end{multicols}
+\endgroup

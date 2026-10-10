@@ -1,0 +1,74 @@
+\section{Tối ưu quy hoạch động}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Convex Hull Trick}
+Nếu chuyển trạng thái có dạng
+\[
+dp_i=\min_j\{m_jx_i+b_j\},
+\]
+mỗi $j$ là một đường thẳng $y=m_jx+b_j$; bài toán là
+thêm đường và hỏi giá trị nhỏ nhất tại $x_i$.
+Nếu độ dốc được thêm theo thứ tự \emph{giảm nghiêm ngặt}
+và các truy vấn $x$ \emph{không giảm}, giữ bao dưới bằng deque/vector.
+Với ba đường liên tiếp $a,b,c$ có $m_a>m_b>m_c$, đường $b$
+bị bỏ nếu giao điểm $a,b$ không nằm trước giao điểm $b,c$:
+\[
+(b_b-b_a)(m_b-m_c)\ge
+(b_c-b_b)(m_a-m_b).
+\]
+Đây là so sánh chéo chính xác bằng số nguyên, không dùng số thực.
+Các tích của hiệu hệ số phải vừa \texttt{\_\_int128};
+kiểu này chưa đủ nếu các hiệu có thể trải hết miền 64 bit.
+Khi hai đường có cùng độ dốc, chỉ giữ đường có tung độ gốc nhỏ hơn.
+Truy vấn tăng $x$ dùng con trỏ tiến; mỗi đường được thêm/xóa
+không quá một lần, tổng $O(n)$ sau khi đã có thứ tự nói trên.
+Phải thêm ít nhất một đường trước khi hỏi.
+Nếu độ dốc hoặc truy vấn không theo thứ tự, không dùng mẫu này
+mà đổi sang Li Chao hoặc cấu trúc khác.
+
+\paragraph{Mẫu CHT đơn điệu (C++17).}
+\cppsnippet{code/dp_optimization/cht.hpp}
+
+\subsection{Li Chao tree}
+Với miền truy vấn nguyên cố định $[L,R]$, Li Chao tree giữ ở
+mỗi nút một đường tối ưu tại điểm giữa. Khi thêm đường mới,
+so sánh ở đầu trái và điểm giữa, giữ đường tốt hơn tại giữa,
+rồi đẩy đường còn lại xuống đúng một nửa có thể thắng.
+Mỗi thao tác thêm/hỏi tốn $O(\log(R-L+1))$ và không cần
+thứ tự độ dốc hay truy vấn. Mẫu dưới hỗ trợ \emph{min}, thêm
+cả đường trên toàn miền; phải hỏi $x\in[L,R]$.
+Giá trị hàm và đáp án dùng \texttt{\_\_int128}; vẫn cần kiểm
+tra giới hạn tích $mx+b$.
+
+\paragraph{Mẫu Li Chao động (C++17).}
+\cppsnippet{code/dp_optimization/li_chao.hpp}
+
+\subsection{Các tối ưu khác}
+Với
+$D_k(j)=\min_{i<j}\{D_{k-1}(i)+C(i,j)\}$,
+nếu chỉ số tối ưu $\operatorname{opt}_k(j)$ không giảm theo $j$,
+có thể tính một hàng bằng chia để trị: tính điểm giữa với
+$i$ trong khoảng tối ưu cho phép, rồi thu hẹp khoảng cho
+hai nửa. Chi phí $O(n\log n)$ lần gọi $C$ mỗi hàng
+(nếu mỗi lần gọi $C$ là $O(1)$); không tự suy ra tính đơn
+điệu chỉ từ vài ví dụ. Bất đẳng thức tứ giác/ma trận Monge
+là một điều kiện đủ thường gặp. Hàm mẫu giả thiết
+$D_{k-1}(i)$ đã biết và tính $j=1,\ldots,n$;
+\texttt{prev[0]} là trạng thái trước vị trí đầu tiên. Giá trị vô cực
+được mã hóa bằng \texttt{LLONG\_MAX/4}, mọi tổng hữu hạn phải
+nằm trong $(-\mathrm{INF},\mathrm{INF})$.
+Khi hòa chọn chỉ số nhỏ nhất, kể cả khi mọi ứng viên đều vô cực;
+tính đơn điệu phải đúng với quy ước này.
+\cppsnippet{code/dp_optimization/dnc.hpp}
+
+Knuth áp dụng cho một dạng khác:
+$D(l,r)=\min_{l\le k<r}\{D(l,k)+D(k+1,r)+W(l,r)\}$.
+Nếu đã chứng minh được
+$\operatorname{opt}(l,r-1)\le\operatorname{opt}(l,r)
+\le\operatorname{opt}(l+1,r)$, chỉ thử $k$ trong khoảng
+đó và giảm từ $O(n^3)$ xuống $O(n^2)$.
+Điều kiện này không đồng nghĩa với điều kiện của chia để trị.
+Khi chưa chứng minh được miền tối ưu, dùng DP gốc hoặc
+kiểm chứng giả thiết trên dữ liệu nhỏ trước khi tối ưu.
+\end{multicols}
+\endgroup

@@ -1,0 +1,67 @@
+\section{Xử lý chuỗi}
+\begingroup\small
+\begin{multicols}{2}
+\subsection{Z-function}
+$Z[i]$ là độ dài tiền tố chung dài nhất của $s$ và
+$s[i\ldots n-1]$; quy ước $Z[0]=n$.
+Duy trì đoạn $[l,r)$ khớp với tiền tố. Nếu $i<r$,
+lấy cận dưới $\min(r-i,Z[i-l])$, rồi so sánh thêm;
+nếu vượt $r$, cập nhật đoạn. Mỗi lần so sánh mở rộng làm
+$r$ tăng nên tổng thời gian $O(n)$.
+Để tìm mẫu $p$ trong văn bản $t$, tính Z của
+$p+\#+t$ với ký tự phân cách không có trong cả hai;
+vị trí có Z ít nhất $|p|$ là một lần khớp. Nếu bảng chữ
+không có ký tự phân cách, dùng chuỗi số nguyên với
+giá trị sentinel riêng.
+
+\subsection{Thuật toán Manacher}
+Đặt $d_1[i]$ là số bán kính đối xứng lẻ quanh ký tự $i$:
+độ dài dài nhất là $2d_1[i]-1$.
+Đặt $d_2[i]$ là số bán kính đối xứng chẵn với tâm giữa
+$i-1$ và $i$: độ dài dài nhất là $2d_2[i]$.
+Duy trì palindrome phải nhất $[l,r]$, dùng tâm đối xứng
+của $i$ để khởi tạo bán kính rồi mở rộng. Tổng thời gian
+$O(n)$. Số xâu con đối xứng, tính cả vị trí trùng nội dung,
+là $\sum_i(d_1[i]+d_2[i])$.
+Mẫu code trả hai mảng bán kính này.
+
+\subsection{Trie}
+Trie lưu các tiền tố thành đỉnh. Với bảng chữ cố định,
+mỗi cạnh gắn một ký tự; chèn một xâu dài $m$ mất $O(m)$.
+Đếm số xâu đi qua mỗi đỉnh để trả số xâu có một tiền tố,
+và đếm số xâu kết thúc để phân biệt tiền tố với từ hoàn chỉnh.
+Mẫu dưới chỉ hỗ trợ chữ thường \texttt{a}--\texttt{z},
+cho phép chèn trùng và không hỗ trợ xóa; số nút tối đa bằng
+$1+$ tổng độ dài các xâu đã chèn.
+\cppsnippet{code/strings/basic.hpp}
+
+\subsection{Thuật toán Aho--Corasick}
+Xây Trie của nhiều mẫu, rồi BFS tạo suffix link: link của
+mỗi đỉnh trỏ tới hậu tố dài nhất vẫn là tiền tố của một mẫu.
+Khi thiếu cạnh ký tự $c$, chuyển theo link; các cạnh thiếu
+có thể điền sẵn để mỗi ký tự văn bản xử lý $O(1)$.
+Cộng số mẫu kết thúc ở các đỉnh trên chuỗi link để đếm mọi
+lần xuất hiện, kể cả mẫu trùng và các lần chồng nhau.
+Với bảng chữ cỡ $\sigma$, thời gian và bộ nhớ xây dựng
+$O(\sigma L)$ cho $L$ nút; quét văn bản $O(|t|)$.
+Mẫu code đếm tổng số lần khớp, chỉ nhận chữ thường
+\texttt{a}--\texttt{z}; phải thêm hết mẫu trước khi gọi
+\texttt{build()} đúng một lần rồi mới truy vấn, và không thêm mẫu sau đó.
+Nếu thêm mẫu rỗng, nó khớp $|t|+1$ lần, gồm cả trước ký tự đầu.
+
+\subsection{Suffix array}
+Mảng hậu tố $SA$ sắp các vị trí $i$ theo thứ tự từ điển của
+$s[i\ldots n-1]$. Thuật toán doubling xếp theo cặp lớp
+tương đương của hai nửa độ dài $2^k$; thêm sentinel nhỏ hơn
+mọi ký tự để biến thành sắp vòng, rồi bỏ sentinel.
+Dùng counting sort theo lớp cho $O(n\log n)$ thời gian
+và $O(n)$ bộ nhớ. Mẫu code nhận byte khác \texttt{0},
+trả các vị trí đánh số từ $0$; xâu rỗng trả mảng rỗng.
+LCP có thể tính thêm bằng Kasai nếu bài cần so sánh nhiều
+hậu tố hoặc đếm xâu con phân biệt, nhưng không nên đưa
+cả bộ nếu bài chỉ cần thứ tự hậu tố.
+
+\paragraph{Mẫu Aho--Corasick và suffix array (C++17).}
+\cppsnippet{code/strings/advanced.hpp}
+\end{multicols}
+\endgroup

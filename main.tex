@@ -1,0 +1,85 @@
+\documentclass[a4paper,landscape,10pt]{article}
+
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont[BoldFont={Latin Modern Mono}]{Latin Modern Mono}
+\newfontfamily\coverfont{HeadingNow-47Extrabold.otf}[
+  Path=/Users/tudung/Library/Fonts/
+]
+\renewcommand{\contentsname}{Mục lục}
+\hypersetup{hidelinks}
+
+\geometry{top=14mm,bottom=12mm,left=12mm,right=12mm}
+\setlength{\columnsep}{7mm}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+\newcommand{\cppsnippet}[1]{\lstinputlisting[language=C++,firstline=5]{#1}}
+\newcommand{\plannedsubsection}[1]{\subsection{#1}\noindent\mbox{}\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{HSGSBN.DjmNatBu —— Phao ICPC 2026}
+\rhead{\thepage}
+\setlength{\headheight}{14pt}
+
+\begin{document}
+\pagenumbering{roman}
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+{\normalsize Nguyễn Đình Tùng Lâm — Đàm Thuận Phong — Nghiêm Tuấn Dũng\par}
+\vfill
+{\coverfont\fontsize{150}{150}\selectfont DJMNATBU\par}
+\vspace{6mm}
+{\normalsize HSGS Bac Ninh\par}
+\vfill
+{\normalsize ICPC 2026\par}
+\end{titlepage}
+\pagenumbering{arabic}
+\begingroup
+\small
+\begin{multicols}{2}
+\tableofcontents
+\end{multicols}
+\endgroup
+\noindent\textit{Code C++17; mọi mẫu giả định đã có
+\texttt{\#include <bits/stdc++.h>}, \texttt{\#include <cassert>}
+và \texttt{using namespace std;}.
+Trong phần lý thuyết, chỉ số thường bắt đầu từ $1$.
+Các mẫu code dùng chỉ số từ $0$ sẽ được ghi rõ tại chỗ.}
+\clearpage
+
+\input{topics/geometry}
+\input{topics/probability}
+\input{topics/game_theory}
+\input{topics/combinatorics}
+\input{topics/number_theory}
+\input{topics/linear_algebra}
+\input{topics/flow}
+\input{topics/matching}
+\input{topics/graph_logic}
+\input{topics/strings}
+\input{topics/dp_optimization}
+\input{topics/quick_reference}
+\clearpage
+\thispagestyle{empty}
+\null\vfill
+\begin{center}
+Once a Djm, always a Djm. Since 2024
+\end{center}
+\vfill\null
+\end{document}
