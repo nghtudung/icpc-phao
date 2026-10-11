@@ -41,12 +41,13 @@ Trong `tests/`, `geometry.cpp` và `probability.cpp` kiểm tra hai phần tươ
 kiểm tra các trường hợp biên và lỗi đã từng gặp. `tests/README.md` giải thích
 bộ kiểm thử chi tiết hơn.
 
-
 ---
+
 2026 HSGSBN.DjmNatBu
 
 Last modified: 11/10/2026
 
 Built for:
 
-* The 2026 ICPC Vietnam Northern Provincial Programming Contest - Khu giảng đường 4 UET, 12 Kiều Mai, Xuân Phương, thành phố Hà Nội 11/10/2026
+* The 2026 ICPC Vietnam Northern Provincial Programming Contest - Khu giảng đường 4 UET (VNU), 12 Kiều Mai, phường Xuân Phương, thành phố Hà Nội 11/10/2026
+  * Result: # 49 OVR, # 18 HS, # 2 BN
