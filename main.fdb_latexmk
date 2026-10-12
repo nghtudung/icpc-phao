@@ -1,11 +1,11 @@
 # Fdb version 4
-["xdvipdfmx"] 1791658257.67297 "main.xdv" "main.pdf" "main" 1791658257.96307 0
-  "main.xdv" 1791658257.62696 914688 e077617c733f4d390439641c216a0213 "xelatex"
+["xdvipdfmx"] 1791819862.20558 "main.xdv" "main.pdf" "main" 1791819862.48426 0
+  "main.xdv" 1791819862.16688 992160 aa6ff6f3fde71945fb0b1622fd8fc5c6 "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1791658255.95678 "/Users/tudung/Documents/GitHub/icpc-phao/main.tex" "main.xdv" "main" 1791658257.96213 0
-  "/Users/tudung/Documents/GitHub/icpc-phao/main.tex" 1791658255.4809 2249 907df2d4bff49c5aad0f23cf5691d573 ""
+["xelatex"] 1791819861.11256 "/Users/tudung/Documents/GitHub/icpc-phao/main.tex" "main.xdv" "main" 1791819862.48341 0
+  "/Users/tudung/Documents/GitHub/icpc-phao/main.tex" 1791819464.82507 2278 19533c44b5257b4cf46ff6ee9d190378 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1246382020 996 a18840b13b499c08ac2de96a99eda4bc ""
@@ -82,6 +82,7 @@
   "/usr/local/texlive/2026basic/texmf-var/web2c/xetex/xelatex.fmt" 1787948134 5411348 1604ea123874e28598cf1c5398e43731 ""
   "/usr/local/texlive/2026basic/texmf.cnf" 1772405582 628 bbc09d6d38872d53c11bb48dc9b14e88 ""
   "code/combinatorics/binomial.hpp" 1791655603.00057 1064 8eaa9c3e4784543591347ca875f93b44 ""
+  "code/combinatorics/lagrange.hpp" 1791819859.43791 1410 e5495db7f06f990492ead1e35ae588b1 ""
   "code/dp_optimization/cht.hpp" 1791655603.001 1144 3a9df6437e84c91569db25b4fb7fae56 ""
   "code/dp_optimization/dnc.hpp" 1791655603.00082 1053 08d19d9c9553ae9ee8be669b0d6e54cc ""
   "code/dp_optimization/li_chao.hpp" 1791655603.00128 1905 a05be97a38e3f22217647f4cac03b0d4 ""
@@ -101,11 +102,11 @@
   "code/quick_reference/pragmas.txt" 1791655868.15565 2059 84a70e7a963929cef2bd81a04e0059b9 ""
   "code/strings/advanced.hpp" 1791655602.99805 2876 83def66034215662b2d928268fcbb248 ""
   "code/strings/basic.hpp" 1791655602.99829 2070 2ab1f5080e2f650a215e50fe9afc03a5 ""
-  "main.aux" 1791658257.62296 12603 6da48b9cd24bd5fc0babd616aff91f94 "xelatex"
-  "main.out" 1791658257.62565 11836 045d8f3ec32659ab8362f83e49a28cf0 "xelatex"
-  "main.tex" 1791658255.4809 2249 907df2d4bff49c5aad0f23cf5691d573 ""
-  "main.toc" 1791658257.62676 6768 3595f2c8c6f7ed1f8e73974def21c016 "xelatex"
-  "topics/combinatorics.tex" 1791655377.88223 3396 235e233e546b05cf15577312ed2e63bf ""
+  "main.aux" 1791819862.16518 13688 dcaf65e8bdae258e32ee607666befc16 "xelatex"
+  "main.out" 1791819862.16619 13206 727a29401424790be0cdc26d065971c5 "xelatex"
+  "main.tex" 1791819464.82507 2278 19533c44b5257b4cf46ff6ee9d190378 ""
+  "main.toc" 1791819862.16678 7445 36446560ac8bf55b0359e406feec5e01 "xelatex"
+  "topics/combinatorics.tex" 1791819741.40396 4706 cce0f33e1e51af8abc7fb083f5afcc39 ""
   "topics/dp_optimization.tex" 1791657004.6944 3813 9cbb7da7131288d4aac6c87c33623e58 ""
   "topics/flow.tex" 1791656985.41583 5318 8a8a5cfa87646096f029aacba90f2fc2 ""
   "topics/game_theory.tex" 1791656980.31632 3079 542ce8a5c8276721779768d7f05ab884 ""
@@ -115,6 +116,7 @@
   "topics/matching.tex" 1791657004.63741 2955 e0d0136ae7855f5c9a9202eeade14631 ""
   "topics/number_theory.tex" 1791655377.84148 3819 32ca328a441697212a89e2219b03e96f ""
   "topics/probability.tex" 1791657170.73898 4710 424aa7cae61f6bd15b11a57065049566 ""
+  "topics/python_basics.tex" 1791819534.64955 4846 b058dabb8a0938ba615cc022a35230ef ""
   "topics/quick_reference.tex" 1791655897.0057 8576 034f621cc2b83f65ce238831bca6fce9 ""
   "topics/strings.tex" 1791655377.82312 3687 65e20c90588d6cd4179a0b42e2fe37fd ""
   (generated)

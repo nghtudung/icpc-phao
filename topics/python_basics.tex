@@ -1,0 +1,127 @@
+\clearpage
+\section{Python cho lập trình thi đấu}
+\begingroup\small
+\lstset{aboveskip=2pt,belowskip=2pt}
+\begin{multicols}{2}
+
+\subsection{Nhập và xuất}
+\texttt{input()} đọc một dòng và trả \texttt{str}. Khi thay bằng
+\texttt{sys.stdin.buffer.readline}, kết quả là \texttt{bytes};
+\texttt{int} và \texttt{map(int, ...)} nhận được bytes, còn xử lý
+chuỗi Unicode thì phải \texttt{decode()}.
+\begin{lstlisting}[language=Python]
+import sys
+input = sys.stdin.buffer.readline
+
+n = int(input())
+a = list(map(int, input().split()))
+u, v = map(int, input().split())
+s = input().rstrip(b"\r\n").decode()
+\end{lstlisting}
+\texttt{split()} tách theo mọi khoảng trắng, không phụ thuộc số dấu
+cách. Nếu cần giữ khoảng trắng ở hai đầu chuỗi, chỉ bỏ ký tự xuống
+dòng như ví dụ; \texttt{strip()} sẽ xóa cả khoảng trắng.
+Khi dữ liệu chỉ gồm số và muốn đọc hết một lần:
+\begin{lstlisting}[language=Python]
+it = iter(map(int, sys.stdin.buffer.read().split()))
+n = next(it)
+a = [next(it) for _ in range(n)]
+\end{lstlisting}
+Cách này giữ toàn bộ input trong bộ nhớ. Với dữ liệu lớn, đọc
+từng dòng. Nếu số lượng phần tử không đủ, \texttt{next(it)}
+phát sinh \texttt{StopIteration}.
+
+\begin{lstlisting}[language=Python]
+print(x, y)                 # cach nhau mot dau cach
+print(*a)                   # in cac phan tu tren mot dong
+out = [str(x) for x in answers]
+sys.stdout.write("\n".join(out))
+\end{lstlisting}
+Gom kết quả rồi \texttt{join} hữu ích khi có rất nhiều dòng;
+\texttt{join} cần các phần tử là \texttt{str}.
+
+\subsection{Vòng lặp, dãy và chuỗi}
+\texttt{range(r)} chạy từ $0$ đến $r-1$;
+\texttt{range(l,r)} không chứa $r$. \texttt{enumerate} giúp lấy cả
+chỉ số và giá trị; đặt \texttt{start=1} khi đề đánh số từ $1$.
+\begin{lstlisting}[language=Python]
+for i in range(n):
+    pass
+for i in range(n - 1, -1, -1):
+    pass
+for i, x in enumerate(a, start=1):
+    pass
+
+a = [0] * n
+grid = [[0] * m for _ in range(n)]
+part = a[l:r]               # chi so l,...,r-1
+rev = a[::-1]
+\end{lstlisting}
+Không tạo ma trận bằng \texttt{[[0] * m] * n}: các hàng khi đó
+trỏ tới cùng một list. \texttt{a[l:r]} tạo list mới.
+\begin{lstlisting}[language=Python]
+words = "a b c".split()
+s = " ".join(words)
+letters = list(s)
+code = ord('A')             # 65
+ch = chr(65)                # 'A'
+\end{lstlisting}
+
+\subsection{Sắp xếp và tìm vị trí}
+\texttt{sort()} sửa list tại chỗ và trả \texttt{None};
+\texttt{sorted()} trả list mới. Python sắp xếp ổn định:
+những phần tử có khóa bằng nhau giữ nguyên thứ tự cũ.
+\begin{lstlisting}[language=Python]
+a.sort()
+a.sort(reverse=True)
+pairs.sort(key=lambda p: (p[1], -p[0]))
+b = sorted(a)
+
+from bisect import bisect_left, bisect_right
+i = bisect_left(a, x)       # dau tien >= x
+j = bisect_right(a, x)      # dau tien > x
+count_x = j - i
+\end{lstlisting}
+Hai hàm \texttt{bisect} yêu cầu đoạn đang xét đã sắp xếp theo
+cùng quy tắc; trả vị trí chèn trong $[0,n]$.
+
+\subsection{Từ điển, tập hợp, hàng đợi và heap}
+\begin{lstlisting}[language=Python]
+from collections import Counter, defaultdict, deque
+from heapq import heappush, heappop
+
+freq = Counter(a)
+cnt = freq[x]                # 0 neu x chua xuat hien
+g = defaultdict(list)
+g[u].append(v)
+seen = set()
+seen.add(u)
+q = deque([u])
+q.append(v)
+first = q.popleft()
+heap = []                    # min-heap
+heappush(heap, (dist, v))
+dist, v = heappop(heap)
+\end{lstlisting}
+Với \texttt{dict} thường, dùng \texttt{d.get(key, 0)} để nhận
+giá trị mặc định mà không tạo khóa mới. \texttt{defaultdict(list)}
+tạo list rỗng khi truy cập khóa chưa có. Heap Python là min-heap;
+muốn lấy số lớn nhất có thể đẩy \texttt{-x} rồi đổi dấu khi lấy ra.
+
+\subsection{Các lỗi cú pháp dễ gặp}
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item Python dùng thụt lề để xác định khối lệnh; điều kiện và
+      vòng lặp kết thúc phần đầu bằng dấu \texttt{:}.
+\item \texttt{/} là chia số thực; \texttt{//} là chia lấy sàn,
+      khác phép cắt về $0$ khi số âm. \texttt{**} là lũy thừa,
+      \verb|^| là XOR, không phải lũy thừa.
+\item \texttt{map(...)} và \texttt{zip(...)} trả iterator;
+      chuyển thành \texttt{list(...)} nếu cần truy cập nhiều lần.
+\item Kiểm tra giới hạn thời gian trước khi dùng Python cho vòng lặp
+      rất lớn hoặc thuật toán đệ quy sâu. Số nguyên lớn, \texttt{pow}
+      modulo và các hàm \texttt{math} xem mục 12.5.
+\end{itemize}
+
+\end{multicols}
+\endgroup

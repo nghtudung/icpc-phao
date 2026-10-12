@@ -209,6 +209,9 @@ INPUT topics/combinatorics.tex
 INPUT ./code/combinatorics/binomial.hpp
 INPUT ./code/combinatorics/binomial.hpp
 INPUT code/combinatorics/binomial.hpp
+INPUT ./code/combinatorics/lagrange.hpp
+INPUT ./code/combinatorics/lagrange.hpp
+INPUT code/combinatorics/lagrange.hpp
 INPUT ./topics/number_theory.tex
 INPUT ./topics/number_theory.tex
 INPUT ./topics/number_theory.tex
@@ -294,6 +297,14 @@ INPUT topics/quick_reference.tex
 INPUT ./code/quick_reference/pragmas.txt
 INPUT ./code/quick_reference/pragmas.txt
 INPUT code/quick_reference/pragmas.txt
+INPUT ./topics/python_basics.tex
+INPUT ./topics/python_basics.tex
+INPUT ./topics/python_basics.tex
+INPUT ./topics/python_basics.tex
+INPUT topics/python_basics.tex
+INPUT /usr/local/texlive/2026basic/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2026basic/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2026basic/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out

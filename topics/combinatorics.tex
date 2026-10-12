@@ -77,5 +77,34 @@ nếu $\gcd(|G|,M)=1$.
 Yêu cầu $p$ nguyên tố và $0\le N<p$; sau tiền xử lý $O(N)$,
 mỗi truy vấn $O(1)$. Hàm Catalan cần $2n\le N$.
 \cppsnippet{code/combinatorics/binomial.hpp}
+
+\subsection{Nội suy Lagrange}
+Trên trường $\mathbb F_p$ với $p$ nguyên tố, cho $k+1$ điểm
+$(x_i,y_i)$ có các $x_i$ đôi một khác nhau modulo $p$.
+Đa thức duy nhất $P$ bậc không quá $k$ đi qua các điểm đó là
+\[
+P(t)=\sum_{i=0}^{k} y_i
+\prod_{\substack{0\le j\le k\\j\ne i}}
+\frac{t-x_j}{x_i-x_j}\pmod p.
+\]
+Thật vậy, hạng ứng với $i$ bằng $y_i$ tại $t=x_i$ và bằng $0$
+tại các mốc còn lại; hiệu của hai đa thức bậc không quá $k$
+có $k+1$ nghiệm nên bằng $0$. Phép chia modulo chỉ hợp lệ khi
+mẫu khác $0$ modulo $p$; tính nghịch đảo $a^{p-2}\bmod p$.
+
+Trường hợp thường gặp: biết $y_i=P(i)$ với $0\le i\le k<p$.
+Khi đó
+\[
+\prod_{j\ne i}(i-j)=(-1)^{k-i}i!(k-i)!.
+\]
+Tích tiền tố và hậu tố của $(t-j)$ cho mọi tử số trong $O(k)$;
+nghịch đảo các giai thừa lấy từ một lần lũy thừa nhanh.
+Mỗi lần tính $P(t)$ tốn $O(k+\log p)$ thời gian và $O(k)$ bộ nhớ.
+Nếu $t\bmod p$ trùng một mốc, trả ngay $y_i$.
+Điều kiện bậc không quá $k$ là thiết yếu: chỉ $k+1$ giá trị
+không xác định được đa thức bậc cao hơn.
+
+\paragraph{Nội suy trên các mốc $0,1,\ldots,k$ (C++17).}
+\cppsnippet{code/combinatorics/lagrange.hpp}
 \end{multicols}
 \endgroup

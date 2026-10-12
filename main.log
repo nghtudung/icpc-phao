@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.8.29)  11 OCT 2026 01:50
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.8.29)  12 OCT 2026 22:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -592,9 +592,13 @@ File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 88.
  (./code/geometry/integer.hpp [2
 
-]) (./code/geometry/real.hpp [3])) (./topics/probability.tex (./code/probability/dp.hpp [4])) (./topics/game_theory.tex (./code/game_theory/game.hpp [5])) (./topics/combinatorics.tex (./code/combinatorics/binomial.hpp [6])) (./topics/number_theory.tex (./code/number_theory/crt.hpp) [7] (./code/number_theory/bignum.hpp [8])) (./topics/linear_algebra.tex (./code/linear_algebra/gauss.hpp) [9] (./code/linear_algebra/matrix.hpp)) (./topics/flow.tex (./code/flow/dinic.hpp [10]) [11] (./code/flow/min_cost_flow.hpp)) (./topics/matching.tex (./code/matching/hopcroft_karp.hpp [12]) (./code/matching/hungarian.hpp [13])) (./topics/graph_logic.tex (./code/graph_logic/two_sat.hpp [14])) (./topics/strings.tex (./code/strings/basic.hpp [15]) (./code/strings/advanced.hpp [16])) (./topics/dp_optimization.tex (./code/dp_optimization/cht.hpp) [17] (./code/dp_optimization/li_chao.hpp) (./code/dp_optimization/dnc.hpp)) (./topics/quick_reference.tex [18] [19
+]) (./code/geometry/real.hpp [3])) (./topics/probability.tex (./code/probability/dp.hpp [4])) (./topics/game_theory.tex (./code/game_theory/game.hpp [5])) (./topics/combinatorics.tex (./code/combinatorics/binomial.hpp [6]) (./code/combinatorics/lagrange.hpp)) (./topics/number_theory.tex [7] (./code/number_theory/crt.hpp) (./code/number_theory/bignum.hpp [8])) (./topics/linear_algebra.tex (./code/linear_algebra/gauss.hpp [9]) (./code/linear_algebra/matrix.hpp [10])) (./topics/flow.tex (./code/flow/dinic.hpp [11]) (./code/flow/min_cost_flow.hpp [12])) (./topics/matching.tex (./code/matching/hopcroft_karp.hpp [13]) (./code/matching/hungarian.hpp)) (./topics/graph_logic.tex [14] (./code/graph_logic/two_sat.hpp)) (./topics/strings.tex [15] (./code/strings/basic.hpp) [16] (./code/strings/advanced.hpp)) (./topics/dp_optimization.tex [17] (./code/dp_optimization/cht.hpp) (./code/dp_optimization/li_chao.hpp [18]) (./code/dp_optimization/dnc.hpp)) (./topics/quick_reference.tex [19] [20
 
-] (./code/quick_reference/pragmas.txt)) [20] [21
+] (./code/quick_reference/pragmas.txt)) (./topics/python_basics.tex [21] (/usr/local/texlive/2026basic/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2025/11/14 1.11b listings language file
+) [22
+
+]) [23
 
 ] (./main.aux)
  ***********
@@ -602,15 +606,15 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 045D8F3EC32659AB8362F83E49A28CF0;11836.
+(rerunfilecheck)             Checksum: 727A29401424790BE0CDC26D065971C5;13206.
  ) 
 Here is how much of TeX's memory you used:
- 14950 strings out of 469709
- 282845 string characters out of 5466023
- 2256305 words of memory out of 5000000
- 43266 multiletter control sequences out of 15000+600000
+ 15167 strings out of 469709
+ 285604 string characters out of 5466023
+ 2342308 words of memory out of 5000000
+ 43475 multiletter control sequences out of 15000+600000
  633306 words of font info for 114 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  73i,14n,93p,414b,2111s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (22 pages, 914688 bytes).
+Output written on main.xdv (24 pages, 992160 bytes).

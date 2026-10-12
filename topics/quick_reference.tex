@@ -88,6 +88,195 @@ Vét cạn $n$ nhỏ giúp bác bỏ giả thuyết, nhưng không thay thế ch
       kể cả khi tổng có thể vô hạn.
 \end{itemize}
 
+\subsection{Các dãy số có tên riêng trong đề tiếng Anh}
+Luôn kiểm tra số hạng đầu và chỉ số của đề: cùng một tên dãy
+có thể được đánh số từ $0$ hoặc $1$, hoặc cho biến thể với hạt giống khác.
+\emph{Term} là số hạng; \emph{run} là đoạn liên tiếp toàn cùng giá trị;
+\emph{distinct} là khác nhau; \emph{partition} có hai nghĩa cần phân biệt
+(chia tập thành nhóm hoặc phân tích số thành tổng).
+
+\paragraph{Fibonacci, Lucas và Jacobsthal.}
+Fibonacci có $F_0=0,F_1=1,F_n=F_{n-1}+F_{n-2}$;
+Lucas có $L_0=2,L_1=1$ và cùng truy hồi, với
+$L_n=F_{n-1}+F_{n+1}$ khi $n\ge1$.
+Jacobsthal có $J_0=0,J_1=1,J_n=J_{n-1}+2J_{n-2}$,
+$J_n=(2^n-(-1)^n)/3$.
+Ba dãy đầu lần lượt là $0,1,1,2,3$;
+$2,1,3,4,7$; $0,1,1,3,5$.
+Với $n$ rất lớn, dùng lũy thừa ma trận hoặc fast doubling
+cho Fibonacci; không dùng công thức số thực để lấy giá trị chính xác.
+
+\paragraph{Triangular và tetrahedral numbers (số tam giác, tứ diện).}
+Số tam giác $T_n=1+\cdots+n=n(n+1)/2$; số tứ diện
+$H_n=\sum_{i=1}^nT_i=\binom{n+2}{3}$, đều đặt số hạng $0$ bằng $0$.
+Nếu đề hỏi số lớp/điểm xếp thành tam giác hoặc khối tứ diện,
+đây là các công thức cần thử trước.
+
+\paragraph{Derangements / subfactorials (hoán vị không điểm cố định).}
+$D_n$ đếm hoán vị $\pi$ của $[n]$ thỏa $\pi(i)\ne i$ mọi $i$.
+$D_0=1,D_1=0$ và
+$D_n=(n-1)(D_{n-1}+D_{n-2})=nD_{n-1}+(-1)^n$.
+Cũng có $D_n=n!\sum_{j=0}^n(-1)^j/j!$ theo bao hàm--loại trừ.
+Đầu dãy: $1,0,1,2,9,44$.
+
+\paragraph{Stirling numbers và Bell numbers.}
+$\left\{\begin{smallmatrix}n\\k\end{smallmatrix}\right\}$
+(\emph{Stirling numbers of the second kind}) đếm cách chia
+$n$ phần tử phân biệt thành đúng $k$ nhóm \emph{không rỗng,
+không gắn nhãn}:
+\[
+S(n,k)=S(n-1,k-1)+kS(n-1,k),\quad S(0,0)=1.
+\]
+Nếu các nhóm được gắn nhãn thì nhân $k!$.
+Số Bell $B_n=\sum_{k=0}^n S(n,k)$ đếm mọi cách chia tập;
+$B_0=1$ và $B_{n+1}=\sum_{k=0}^n\binom nk B_k$.
+Còn $\left[\begin{smallmatrix}n\\k\end{smallmatrix}\right]$
+(\emph{unsigned Stirling numbers of the first kind}) đếm hoán vị
+$n$ phần tử có đúng $k$ chu trình rời nhau, với
+$c(n,k)=c(n-1,k-1)+(n-1)c(n-1,k)$ và $c(0,0)=1$.
+Hai loại Stirling khác hẳn nhau; đọc từ \emph{cycles} hay
+\emph{set partitions} để chọn đúng.
+
+\paragraph{Integer partition numbers (số phân hoạch nguyên).}
+$p(n)$ đếm cách viết $n$ thành tổng các số nguyên dương,
+không xét thứ tự: $p(0)=1$; đầu dãy $1,1,2,3,5,7,11$.
+Ví dụ $p(4)=5$: $4$, $3+1$, $2+2$, $2+1+1$, $1+1+1+1$.
+Tính $p(0),\ldots,p(N)$ bằng quy hoạch động kiểu đổi tiền:
+với từng phần $v=1,\ldots,N$, cập nhật
+$dp[s]\mathrel{+}=dp[s-v]$ theo $s$ tăng từ $v$ tới $N$.
+Chi phí $O(N^2)$; nếu chỉ cho phép các phần khác nhau, duyệt $s$
+giảm. Đây là \emph{integer partition}, không phải Bell number.
+
+\paragraph{Golomb sequence (dãy Golomb).}
+Dãy dương không giảm bắt đầu bằng $1$ và số $i$ xuất hiện
+đúng $a(i)$ lần. Đầu dãy:
+$1,2,2,3,3,4,4,4,5,5,5,6,6,6,6,\ldots$
+Với chỉ số từ $1$, $a(1)=1$ và
+\[
+a(n)=1+a\bigl(n-a(a(n-1))\bigr)\quad(n\ge2).
+\]
+Tính các số hạng theo thứ tự tăng dần trong $O(N)$; tránh
+lẫn $a(n)$ (giá trị tại vị trí $n$) với độ dài đoạn gồm số $n$.
+Nếu hỏi vị trí xuất hiện của giá trị $v$, đặt
+$G(v)=\sum_{i=1}^{v}a(i)$; các vị trí là
+$G(v-1)+1,\ldots,G(v)$.
+
+\paragraph{Kolakoski sequence (dãy Kolakoski).}
+Dãy chỉ gồm $1,2$, bắt đầu $1,2,2,1,1,2,1,2,2,\ldots$.
+Độ dài các \emph{run} liên tiếp của chính dãy lại tạo ra
+$1,2,2,1,1,2,\ldots$; giá trị các run luân phiên $1,2$.
+Để sinh $N$ phần tử, khởi tạo $[1,2,2]$, bắt đầu đọc từ
+phần tử thứ ba (chỉ số vector $2$): mỗi giá trị đọc được là
+độ dài của run mới, lần lượt thêm các số $1,2,1,2,\ldots$.
+Độ phức tạp $O(N)$. Không nhầm với Golomb: Golomb đếm số lần
+mỗi \emph{giá trị} xuất hiện, Kolakoski mô tả độ dài các \emph{run}.
+
+\paragraph{Thue--Morse sequence.}
+Với $n\ge0$, $t_n$ là chẵn lẻ của số bit $1$ trong biểu diễn nhị phân
+của $n$. Đầu dãy: $0,1,1,0,1,0,0,1,\ldots$;
+$t_{2n}=t_n$, $t_{2n+1}=1-t_n$.
+Cũng có phép thay đồng thời $0\mapsto01$, $1\mapsto10$.
+Trong GCC, $t_n=\texttt{\_\_builtin\_parityll(n)}$.
+
+\paragraph{Recamán's sequence.}
+$r_0=0$. Tại bước $n\ge1$, thử $r_{n-1}-n$; nếu kết quả
+không âm và \emph{chưa từng xuất hiện}, lấy nó; nếu không,
+lấy $r_{n-1}+n$. Đầu dãy $0,1,3,6,2,7,13,20,12,21,\ldots$.
+Khi cài, giữ \texttt{unordered\_set} các giá trị đã thấy;
+nhánh cộng vẫn có thể tạo giá trị từng xuất hiện trước đó.
+
+\paragraph{Look-and-say sequence.}
+Bắt đầu từ chuỗi \texttt{"1"}; đọc từng run của chuỗi trước
+bằng ``số lần, rồi đến chữ số'':
+\texttt{1, 11, 21, 1211, 111221, 312211, ...}.
+Ví dụ \texttt{111221} gồm ba \texttt{1}, hai \texttt{2}, một
+\texttt{1}, nên số hạng sau là \texttt{312211}.
+Lưu bằng \emph{string}, không dùng kiểu số nguyên; độ dài tăng
+nhanh. Quy tắc phụ thuộc hạt giống và cách đọc run trong đề.
+
+\paragraph{Ulam sequence.}
+Bắt đầu bằng $u_1=1,u_2=2$. Mỗi số tiếp theo là số nhỏ nhất
+lớn hơn số trước, biểu diễn được thành tổng của hai số hạng
+\emph{khác nhau} đã có theo đúng một cách (không xét thứ tự).
+Đầu dãy: $1,2,3,4,6,8,11,13,16,\ldots$.
+Để tính một tiền tố nhỏ, duy trì số cách biểu diễn của từng tổng,
+chặn bộ đếm ở $2$: chỉ cần phân biệt $0,1,\ge2$ cách.
+Khi thêm số mới, cập nhật các tổng với mọi số cũ; phải xét
+giới hạn giá trị và chi phí bộ nhớ của bài cụ thể.
+
+\paragraph{Stern's diatomic sequence.}
+$s_0=0,s_1=1$;
+$s_{2n}=s_n$ và $s_{2n+1}=s_n+s_{n+1}$ ($n\ge1$ cho công thức chẵn).
+Đầu dãy $0,1,1,2,1,3,2,3,1,\ldots$.
+Cặp $(s_n,s_{n+1})$ cho phân số $s_n/s_{n+1}$ trong cách liệt kê
+Calkin--Wilf; truy hồi nhị phân giúp tính theo các bit của $n$.
+
+\paragraph{Mẫu C++17 cho ba dãy tự mô tả/bit.}
+Hàm Golomb trả vector dùng chỉ số từ $1$; Kolakoski trả vector
+dùng chỉ số từ $0$; Thue--Morse nhận $n$ từ $0$.
+\cppsnippet{code/quick_reference/sequences.hpp}
+
+\subsection{Tổng và tích tiền tố của các dãy}
+Quy tắc sinh xác định được tổng/tích bằng cách duyệt các số hạng,
+nhưng không bảo đảm có công thức khép kín tính được ngay ở chỉ số lớn.
+Cần tách hai câu hỏi: \emph{tính $a_n$} và \emph{tính}
+$\sum_{i\le n}a_i$ hoặc $\prod_{i\le n}a_i$.
+
+\paragraph{Các tổng có công thức gọn.}
+Với $F_0=0,F_1=1$, $L_0=2,L_1=1$ và $n\ge0$:
+\[
+\sum_{i=0}^{n}F_i=F_{n+2}-1,\qquad
+\sum_{i=0}^{n}F_i^2=F_nF_{n+1},\qquad
+\sum_{i=0}^{n}L_i=L_{n+2}-1.
+\]
+Với số tam giác $T_i=i(i+1)/2$,
+$\sum_{i=1}^{n}T_i=\binom{n+2}{3}$.
+Các đồng nhất thức này suy ra bằng trừ hai vế của truy hồi
+hoặc bằng quy nạp; tính modulo như các công thức số nguyên,
+nhưng tránh chia cho $2$ hay $6$ modulo khi mẫu không khả nghịch.
+
+\paragraph{Tổng theo khối.}
+Thue--Morse có $t_{2i}+t_{2i+1}=1$, nên
+\[
+\sum_{i=0}^{2q-1}t_i=q,\qquad
+\sum_{i=0}^{2q}t_i=q+t_q.
+\]
+Với Stern, $s_{2^m}=s_{2^{m+1}}=1$;
+từ truy hồi chẵn/lẻ suy ra
+$\sum_{i=2^m}^{2^{m+1}-1}s_i=3^m$.
+Các công thức theo khối không tự động cho tổng của một đoạn
+bất kỳ; khi đó tách đoạn hoặc tiền xử lý tổng tiền tố.
+
+\paragraph{Golomb: gom theo các run.}
+Đặt $G(0)=0$, $G(v)=\sum_{j=1}^{v}a(j)$ là vị trí cuối
+của giá trị $v$. Nếu $G(v-1)<N\le G(v)$ và
+$r=N-G(v-1)$, thì
+\[
+\sum_{i=1}^{N}a(i)=\sum_{j=1}^{v-1}j\,a(j)+rv,
+\quad
+\prod_{i=1}^{N}a(i)=\left(\prod_{j=1}^{v-1}j^{a(j)}\right)v^r.
+\]
+Tiền xử lý $G(v)$ cùng tổng có trọng số và tích theo modulo;
+dùng \texttt{lower\_bound} để tìm $v$ cho mỗi truy vấn $N$.
+Khi tích lấy modulo hợp số, không lấy thương của hai tích
+tiền tố nếu mẫu không khả nghịch.
+
+\paragraph{Kolakoski và các dãy sinh theo trạng thái.}
+Gọi $c_2(N)$ là số chữ số $2$ trong $N$ số hạng đầu của
+Kolakoski. Vì mọi số hạng là $1$ hoặc $2$,
+\[
+\sum_{i=1}^{N}a(i)=N+c_2(N),\qquad
+\prod_{i=1}^{N}a(i)=2^{c_2(N)}.
+\]
+Điểm khó nằm ở việc tính $c_2(N)$: không được thay ngay bằng
+$N/2$; ngay cả mệnh đề mật độ chữ số $1$ tiến tới $1/2$
+cũng chưa được chứng minh. Với phạm vi hữu hạn, sinh dãy rồi
+tiền xử lý số lượng $2$.
+Recamán, Ulam và look-and-say phụ thuộc tập giá trị đã xuất hiện,
+số cách biểu diễn hoặc toàn bộ chuỗi trước đó. Với giới hạn vừa phải,
+sinh dãy và tích lũy tổng/tích theo modulo; đừng suy ra có công thức
+đơn giản chỉ từ việc quy tắc sinh là xác định.
+
 \subsection{Checklist lỗi và trường hợp biên}
 \paragraph{Trước khi cài.}
 Xác định đoạn đóng hay nửa mở, chỉ số từ $0$ hay $1$, trạng thái vô
